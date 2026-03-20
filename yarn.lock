@@ -2419,6 +2419,11 @@ regexp.prototype.flags@^1.5.4:
     gopd "^1.2.0"
     set-function-name "^2.0.2"
 
+remeda@^2.33.6:
+  version "2.33.6"
+  resolved "https://registry.yarnpkg.com/remeda/-/remeda-2.33.6.tgz#5cc100b6edad5e8ba9a5859e15b400c94e83c0d7"
+  integrity sha512-tazDGH7s75kUPGBKLvhgBEHMgW+TdDFhjUAMdQj57IoWz6HsGa5D2RX5yDUz6IIqiRRvZiaEHzCzWdTeixc/Kg==
+
 resolve-from@^4.0.0:
   version "4.0.0"
   resolved "https://registry.yarnpkg.com/resolve-from/-/resolve-from-4.0.0.tgz#4abcd852ad32dd7baabfe9b40e00a36db5f392e6"

@@ -12,7 +12,8 @@
     "format": "prettier --write ."
   },
   "dependencies": {
-    "@alloy-js/java": "^0.22.0"
+    "@alloy-js/java": "^0.22.0",
+    "remeda": "^2.33.6"
   },
   "devDependencies": {
     "@alloy-js/cli": "^0.22.0",
