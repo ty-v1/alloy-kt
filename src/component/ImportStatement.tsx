@@ -1,7 +1,7 @@
 import { Component } from "@alloy-js/core";
 import { useSemicolonPolicy } from "../context/useSemicolonPolicy.js";
 
-type Props = {
+export type ImportStatementProps = {
   /**
    * The name of the imported class.
    * @example String
@@ -30,7 +30,7 @@ type Props = {
 /**
  * Kotlin import statement.
  */
-export const ImportStatement: Component<Props> = (props) => {
+export const ImportStatement: Component<ImportStatementProps> = (props) => {
   const { semicolon } = useSemicolonPolicy();
 
   if (props.wildcard) {
