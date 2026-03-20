@@ -1,5 +1,4 @@
-// context interface
-import { createContext, useContext } from "@alloy-js/core";
+import { createNamedContext, useContext } from "@alloy-js/core";
 
 export type SemicolonPolicy = {
   /**
@@ -10,7 +9,7 @@ export type SemicolonPolicy = {
   semicolon?: boolean;
 };
 
-export const SemicolonPolicy = createContext<SemicolonPolicy>({
+export const SemicolonPolicy = createNamedContext<SemicolonPolicy>("KotlinSemicolonPolicy", {
   semicolon: false,
 });
 
