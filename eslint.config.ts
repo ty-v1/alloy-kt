@@ -30,6 +30,7 @@ export default defineConfig([
       "no-unused-vars": "off",
       "prefer-arrow-callback": "error",
       "@typescript-eslint/no-unsafe-return": "off",
+      "@typescript-eslint/no-unsafe-argument": "off",
     },
     settings: {
       "import/resolver": {
