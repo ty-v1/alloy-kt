@@ -5,6 +5,7 @@ export default defineConfig({
   test: {
     include: ["test/**/*.test.ts", "test/**/*.test.tsx"],
     exclude: ["test/**/*.d.ts"],
+    globals: true,
   },
   esbuild: {
     // @ts-expect-error it seems to need
