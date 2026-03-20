@@ -6,7 +6,7 @@ export type SemicolonPolicy = {
    *
    * @default false
    */
-  semicolon?: boolean;
+  readonly semicolon?: boolean;
 };
 
 export const SemicolonPolicy = createNamedContext<SemicolonPolicy>("KotlinSemicolonPolicy", {

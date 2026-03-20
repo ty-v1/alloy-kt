@@ -6,25 +6,25 @@ export type ImportStatementProps = {
    * The name of the imported class.
    * @example String
    */
-  name: string;
+  readonly name: string;
   /**
    * The package of the imported class.
    * @example java.lang
    */
-  package: string;
+  readonly package: string;
   /**
    * If the imported class is a wildcard.
    * If true, alias is ignored.
    *
    * @default false
    */
-  wildcard?: boolean;
+  readonly wildcard?: boolean;
   /**
    * The alias of the imported class.
    *
    * @example jString
    */
-  alias?: string;
+  readonly alias?: string;
 };
 
 /**
