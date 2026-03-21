@@ -9,7 +9,8 @@
     "skipLibCheck": true,
     "outDir": "dist",
     "declaration": true,
-    "jsx": "preserve",
+    "jsx": "react-jsx",
+    "jsxImportSource": "@alloy-js/core",
     "types": ["vitest/globals"]
   },
   "include": ["src/**/*", "test/**/*"]
