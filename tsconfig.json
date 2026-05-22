@@ -11,7 +11,7 @@
     "declaration": true,
     "jsx": "react-jsx",
     "jsxImportSource": "@alloy-js/core",
-    "types": ["vitest/globals"]
+    "types": ["vitest/globals", "jest-extended"]
   },
   "include": ["src/**/*", "test/**/*"]
 }
