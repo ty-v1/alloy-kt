@@ -1,6 +1,6 @@
 import { Children, Declaration as CoreDeclaration, Namekey, Refkey } from "@alloy-js/core";
 import { KotlinElements, useKotlinNamePolicy } from "../context/createKotlinNamePolicy.js";
-import { useLexicalScope } from "../hook/useLexicalScope.js";
+import { useLexicalScope } from "../scope/KotlinLexicalScope.js";
 import { KotlinOutputSymbol } from "../symbol/index.js";
 
 export type DeclarationProps = {
