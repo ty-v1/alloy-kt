@@ -25,8 +25,9 @@ export const createKotlinNamePolicy: () => NamePolicy<KotlinElements> = () => {
       case "class":
       case "interface":
       case "enum":
-      case "enum-member":
         return pascalCase(name);
+      case "enum-member":
+        return constantCase(name);
       case "constant":
         return constantCase(name);
       default:
