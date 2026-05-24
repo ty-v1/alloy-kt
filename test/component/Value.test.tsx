@@ -1,4 +1,3 @@
-import { JSX } from "@alloy-js/core/jsx-runtime";
 import { renderToString } from "@alloy-js/core/testing";
 import { describe, expect, it } from "vitest";
 import { Value } from "../../src/component/Value.js";
