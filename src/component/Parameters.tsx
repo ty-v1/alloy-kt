@@ -17,7 +17,7 @@ export type ParametersProps = {
 };
 
 function isParameterDefinition(v: ParameterDefinition | Children): v is ParameterDefinition {
-  return isPlainObject(v) && "type" in (v as object);
+  return isPlainObject(v) && "type" in v;
 }
 
 /**
