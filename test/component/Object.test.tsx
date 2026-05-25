@@ -17,9 +17,7 @@ describe("KotlinObject", () => {
   });
 
   it("renders an object with body", () => {
-    const res = renderInTestContext(
-      <KotlinObject name="Singleton">{"val instance = Singleton"}</KotlinObject>,
-    );
+    const res = renderInTestContext(<KotlinObject name="Singleton">{"val instance = Singleton"}</KotlinObject>);
 
     expect(res).toContain(d`
       object Singleton {

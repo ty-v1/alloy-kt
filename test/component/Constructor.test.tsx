@@ -44,9 +44,7 @@ describe("SecondaryConstructor", () => {
   });
 
   it("renders delegation without body", () => {
-    const res = renderToString(
-      <SecondaryConstructor parameters={{ n: "String" }} delegatedParameters="n" />,
-    );
+    const res = renderToString(<SecondaryConstructor parameters={{ n: "String" }} delegatedParameters="n" />);
 
     expect(res).toBe("constructor(n: String) : this(n)");
   });
