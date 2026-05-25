@@ -1,9 +1,9 @@
 import { Block, Children, Namekey, Refkey, Show } from "@alloy-js/core";
-import { Name } from "@alloy-js/java";
 import { isNonNullish } from "remeda";
 import { Declaration } from "./Declaration.js";
 import { LexicalScope } from "./LexicalScope.js";
 import { Modifiers } from "./Modifiers.js";
+import { Name } from "./Name.js";
 import { SupertypeList } from "./SupertypeList.js";
 
 export type ObjectProps = {

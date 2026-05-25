@@ -1,11 +1,11 @@
 import { Block, Children, For, Indent, Namekey, Refkey, Show } from "@alloy-js/core";
-import { Name } from "@alloy-js/java";
 import { isEmptyish, isNonNullish } from "remeda";
 import { useKotlinNamePolicy } from "../context/createKotlinNamePolicy.js";
 import { PrimaryConstructor, PrimaryConstructorProps } from "./Constructor.js";
 import { Declaration } from "./Declaration.js";
 import { LexicalScope } from "./LexicalScope.js";
 import { Modifiers } from "./Modifiers.js";
+import { Name } from "./Name.js";
 import { SupertypeList } from "./SupertypeList.js";
 
 export type EnumProps = {
