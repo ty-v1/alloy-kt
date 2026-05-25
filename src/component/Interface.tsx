@@ -37,10 +37,13 @@ export const Interface = (props: InterfaceProps) => {
         <Show when={!isNullish(props.generics)}>
           <TypeParameters generics={props.generics} />
         </Show>
-        <SupertypeList implements={props.extends} />{" "}
-        <LexicalScope>
-          <Block>{props.children}</Block>
-        </LexicalScope>
+        <SupertypeList implements={props.extends} />
+        <Show when={!isNullish(props.children)}>
+          {" "}
+          <LexicalScope>
+            <Block>{props.children}</Block>
+          </LexicalScope>
+        </Show>
       </group>
     </Declaration>
   );

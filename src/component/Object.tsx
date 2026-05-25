@@ -1,5 +1,6 @@
-import { Block, Children, Namekey, Refkey } from "@alloy-js/core";
+import { Block, Children, Namekey, Refkey, Show } from "@alloy-js/core";
 import { Name } from "@alloy-js/java";
+import { isNonNullish } from "remeda";
 import { Declaration } from "./Declaration.js";
 import { LexicalScope } from "./LexicalScope.js";
 import { Modifiers } from "./Modifiers.js";
@@ -30,10 +31,13 @@ export const KotlinObject = (props: ObjectProps) => {
       <group>
         <Modifiers {...props} />
         object <Name />
-        <SupertypeList implements={props.supertypes} />{" "}
-        <LexicalScope>
-          <Block>{props.children}</Block>
-        </LexicalScope>
+        <SupertypeList implements={props.supertypes} />
+        <Show when={isNonNullish(props.children)}>
+          {" "}
+          <LexicalScope>
+            <Block>{props.children}</Block>
+          </LexicalScope>
+        </Show>
       </group>
     </Declaration>
   );
@@ -58,7 +62,11 @@ export const CompanionObject = ({ name, supertypes, children }: CompanionObjectP
   return (
     <>
       companion object{name ? ` ${name}` : ""}
-      <SupertypeList implements={supertypes} /> <Block>{children}</Block>
+      <SupertypeList implements={supertypes} />
+      <Show when={isNonNullish(children)}>
+        {" "}
+        <Block>{children}</Block>
+      </Show>
     </>
   );
 };

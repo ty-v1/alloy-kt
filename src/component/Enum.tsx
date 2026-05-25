@@ -30,10 +30,13 @@ export const Enum = (props: EnumProps) => {
         <Modifiers {...props} />
         enum class <Name />
         {isNonNullish(props.primaryConstructor) && <PrimaryConstructor {...props.primaryConstructor} />}
-        <SupertypeList implements={props.implements} />{" "}
-        <LexicalScope>
-          <Block>{props.children}</Block>
-        </LexicalScope>
+        <SupertypeList implements={props.implements} />
+        <Show when={isNonNullish(props.children)}>
+          {" "}
+          <LexicalScope>
+            <Block>{props.children}</Block>
+          </LexicalScope>
+        </Show>
       </group>
     </Declaration>
   );

@@ -56,10 +56,13 @@ export const Class = (props: ClassProps) => {
         <Show when={!isNullish(props.primaryConstructor)}>
           <PrimaryConstructor {...props.primaryConstructor!} />
         </Show>
-        <SupertypeList extends={props.extends} implements={props.implements} />{" "}
-        <LexicalScope>
-          <Block>{props.children}</Block>
-        </LexicalScope>
+        <SupertypeList extends={props.extends} implements={props.implements} />
+        <Show when={!isNullish(props.children)}>
+          {" "}
+          <LexicalScope>
+            <Block>{props.children}</Block>
+          </LexicalScope>
+        </Show>
       </group>
     </Declaration>
   );

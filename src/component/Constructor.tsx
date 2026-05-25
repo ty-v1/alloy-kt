@@ -51,8 +51,11 @@ export const SecondaryConstructor = (props: SecondaryConstructorProps) => {
   return (
     <>
       constructor({params})
-      <Show when={!isNullish(props.delegatedParameters)}> : this({props.delegatedParameters})</Show>{" "}
-      <Block>{props.children}</Block>
+      <Show when={!isNullish(props.delegatedParameters)}> : this({props.delegatedParameters})</Show>
+      <Show when={!isNullish(props.children)}>
+        {" "}
+        <Block>{props.children}</Block>
+      </Show>
     </>
   );
 };
