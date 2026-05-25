@@ -4,33 +4,45 @@ import { Class } from "../../src/component/Class.js";
 import { renderInTestContext } from "../utils.js";
 
 describe("Class", () => {
-  it("renders a minimal class", () => {
+  it("renders a minimal class without body", () => {
     const res = renderInTestContext(<Class name="Foo" />);
 
     expect(res).toBe(d`
       package me.test.code
 
-      class Foo {}
+      class Foo
     `);
   });
 
-  it("renders a data class", () => {
+  it("renders a class with body", () => {
+    const res = renderInTestContext(<Class name="Foo">{"val x: Int = 0"}</Class>);
+
+    expect(res).toBe(d`
+      package me.test.code
+
+      class Foo {
+        val x: Int = 0
+      }
+    `);
+  });
+
+  it("renders a data class without body", () => {
     const res = renderInTestContext(<Class data name="Person" />);
 
     expect(res).toBe(d`
       package me.test.code
 
-      data class Person {}
+      data class Person
     `);
   });
 
-  it("renders a sealed class", () => {
+  it("renders a sealed class without body", () => {
     const res = renderInTestContext(<Class sealed name="Result" />);
 
     expect(res).toBe(d`
       package me.test.code
 
-      sealed class Result {}
+      sealed class Result
     `);
   });
 
@@ -40,7 +52,7 @@ describe("Class", () => {
     expect(res).toBe(d`
       package me.test.code
 
-      class Box<T> {}
+      class Box<T>
     `);
   });
 
@@ -52,7 +64,7 @@ describe("Class", () => {
     expect(res).toBe(d`
       package me.test.code
 
-      class Person(name: String, age: Int) {}
+      class Person(name: String, age: Int)
     `);
   });
 
@@ -62,7 +74,7 @@ describe("Class", () => {
     expect(res).toBe(d`
       package me.test.code
 
-      public open class Base {}
+      public open class Base
     `);
   });
 
@@ -74,7 +86,7 @@ describe("Class", () => {
     expect(res).toBe(d`
       package me.test.code
 
-      value class Wrapper(value: Int) {}
+      value class Wrapper(value: Int)
     `);
   });
 });

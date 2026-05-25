@@ -29,21 +29,25 @@ describe("PrimaryConstructor", () => {
 });
 
 describe("SecondaryConstructor", () => {
-  it("renders constructor with empty body", () => {
-    const res = renderToString(<SecondaryConstructor />);
+  it("renders constructor with body", () => {
+    const res = renderToString(<SecondaryConstructor>{"println()"}</SecondaryConstructor>);
 
-    expect(res).toBe("constructor() {}");
+    expect(res).toBe("constructor() {\n  println()\n}");
   });
 
-  it("renders constructor with parameters", () => {
-    const res = renderToString(<SecondaryConstructor parameters={{ age: "Int" }} />);
+  it("renders constructor with parameters and body", () => {
+    const res = renderToString(
+      <SecondaryConstructor parameters={{ age: "Int" }}>{"this.age = age"}</SecondaryConstructor>,
+    );
 
-    expect(res).toBe("constructor(age: Int) {}");
+    expect(res).toBe("constructor(age: Int) {\n  this.age = age\n}");
   });
 
-  it("renders delegation to this", () => {
-    const res = renderToString(<SecondaryConstructor parameters={{ n: "String" }} delegatedParameters="n" />);
+  it("renders delegation without body", () => {
+    const res = renderToString(
+      <SecondaryConstructor parameters={{ n: "String" }} delegatedParameters="n" />,
+    );
 
-    expect(res).toBe("constructor(n: String) : this(n) {}");
+    expect(res).toBe("constructor(n: String) : this(n)");
   });
 });

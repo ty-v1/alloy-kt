@@ -5,12 +5,10 @@ import { Enum, EnumMember } from "../../src/component/Enum.js";
 import { renderInTestContext } from "../utils.js";
 
 describe("Enum", () => {
-  it("renders a minimal enum class", () => {
+  it("renders a minimal enum class without body", () => {
     const res = renderInTestContext(<Enum name="Color" />);
 
-    expect(res).toContain(d`
-      enum class Color {}
-    `);
+    expect(res).toContain("enum class Color");
   });
 
   it("renders an enum class with members", () => {
