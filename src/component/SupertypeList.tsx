@@ -15,7 +15,7 @@ export const SupertypeList = (props: SupertypeListProps) => {
     all.push(props.extends);
   }
 
-  if (props.implements) {
+  if (isNonNullish(props.implements)) {
     all.push(...props.implements);
   }
 
