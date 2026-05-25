@@ -1,4 +1,3 @@
-import { d } from "@alloy-js/core/testing";
 import { describe, expect, it } from "vitest";
 import { Interface } from "../../src/component/Interface.js";
 import { renderInTestContext } from "../utils.js";
