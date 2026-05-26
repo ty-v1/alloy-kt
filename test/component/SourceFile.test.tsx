@@ -23,7 +23,7 @@ describe("SourceFile", () => {
       "Foo.kt": d`
         package com.example
 
-        class Foo {}
+        class Foo
       `,
     });
   });
