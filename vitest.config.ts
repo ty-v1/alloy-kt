@@ -5,11 +5,11 @@ export default defineConfig({
   test: {
     include: ["test/**/*.test.ts", "test/**/*.test.tsx"],
     exclude: ["test/**/*.d.ts"],
+    globals: true,
+    setupFiles: ["./test/setup.ts"],
   },
-  esbuild: {
-    // @ts-expect-error it seems to need
+  oxc: {
     jsx: "preserve",
-    sourcemap: "both",
   },
   plugins: [alloyPlugin()],
 });
