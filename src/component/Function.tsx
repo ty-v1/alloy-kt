@@ -1,12 +1,14 @@
-import { Block, Children, code, Show } from "@alloy-js/core";
+import { Block, Children, code, Refkey, Show } from "@alloy-js/core";
 import { isNonNullish } from "remeda";
-import { useKotlinNamePolicy } from "../context/createKotlinNamePolicy.js";
+import { Declaration } from "./Declaration.js";
 import { Modifiers } from "./Modifiers.js";
+import { Name } from "./Name.js";
 import { ParameterDefinition, Parameters } from "./Parameters.js";
 import { TypeParameters, TypeParametersProps } from "./TypeParameters.js";
 
 export type FunctionProps = TypeParametersProps & {
   readonly name: string;
+  readonly refkey?: Refkey;
   readonly returnType?: Children;
   readonly parameters?: Record<string, ParameterDefinition | Children>;
   /**
@@ -57,21 +59,19 @@ const FunctionBody = (props: FunctionBodyProps) => {
  * `expressionBody` takes priority over `children`.
  */
 export const Function = (props: FunctionProps) => {
-  const name = useKotlinNamePolicy().getName(props.name, "function");
-
   return (
-    <>
+    <Declaration name={props.name} refkey={props.refkey} nameKind="function">
       <Modifiers {...props} />
       {"fun "}
       <Show when={isNonNullish(props.generics)}>
         <TypeParameters generics={props.generics} />{" "}
       </Show>
-      {name}(<Parameters parameters={props.parameters} />)
+      <Name />(<Parameters parameters={props.parameters} />)
       <Show when={isNonNullish(props.returnType)}>
         {": "}
         {props.returnType}
       </Show>
       <FunctionBody expressionBody={props.expressionBody}>{props.children}</FunctionBody>
-    </>
+    </Declaration>
   );
 };
