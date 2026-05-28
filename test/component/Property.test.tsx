@@ -45,4 +45,16 @@ describe("Property", () => {
       "override val size: Int = 0",
     );
   });
+
+  it("renders delegated val", () => {
+    expect(render(<Property val name="value" type="String" by="delegate" />)).toBe(
+      "val value: String by delegate",
+    );
+  });
+
+  it("renders delegated var with modifier", () => {
+    expect(render(<Property private var name="config" type="Config" by="ConfigDelegate()" />)).toBe(
+      "private var config: Config by ConfigDelegate()",
+    );
+  });
 });
