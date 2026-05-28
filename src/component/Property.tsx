@@ -1,4 +1,4 @@
-import { Children, Refkey, Show } from "@alloy-js/core";
+import { Children, For, Refkey, Show } from "@alloy-js/core";
 import { isNonNullish } from "remeda";
 import { Declaration } from "./Declaration.js";
 import { Modifiers } from "./Modifiers.js";
@@ -11,6 +11,7 @@ export type PropertyProps = {
   readonly val?: boolean;
   readonly var?: boolean;
   readonly initialValue?: Children;
+  readonly by?: Children;
   // visibility
   readonly public?: boolean;
   readonly private?: boolean;
@@ -37,6 +38,7 @@ export const Property = (props: PropertyProps) => {
       <Modifiers {...props} />
       {keyword} <Name />: {props.type}
       <Show when={isNonNullish(props.initialValue)}> = {props.initialValue}</Show>
+      <Show when={isNonNullish(props.by)}> by {props.by}</Show>
     </Declaration>
   );
 };
