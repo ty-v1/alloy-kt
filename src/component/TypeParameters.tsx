@@ -6,7 +6,7 @@ export type TypeParametersProps = {
    * Type parameter name to upper bound.
    * `undefined` means unconstrained.
    */
-  readonly generics?: Record<string, Children>;
+  readonly generics?: Record<string, TypeParameterDefinition | undefined>;
 };
 
 /**
