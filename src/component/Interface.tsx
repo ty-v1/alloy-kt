@@ -22,6 +22,7 @@ export type InterfaceProps = TypeParametersProps & {
   /**
    * Functional interface.
    */
+  // TODO add fun to Modifiers
   readonly fun?: boolean;
   readonly extends?: Children[];
   readonly annotations?: AnnotationProps[];
@@ -30,24 +31,33 @@ export type InterfaceProps = TypeParametersProps & {
 /**
  * Kotlin `interface` declaration.
  */
-export const Interface = (props: InterfaceProps) => {
+export const Interface = ({
+  refkey,
+  name,
+  annotations = [],
+  extends: ktExtends = [],
+  generics = {},
+  fun = false,
+  children,
+  ...modifiers
+}: InterfaceProps) => {
   return (
-    <Declaration {...props} name={props.name} nameKind="interface">
-      <Show when={!isEmptyish(props.annotations)}>
-        <Annotations annotations={props.annotations ?? []} />
+    <Declaration refkey={refkey} name={name} nameKind="interface">
+      <Show when={!isEmptyish(annotations)}>
+        <Annotations annotations={annotations} />
         <hbr />
       </Show>
       <group>
-        <Modifiers {...props} />
-        {props.fun ? "fun " : ""}interface <Name />
-        <Show when={!isNullish(props.generics)}>
-          <TypeParameters generics={props.generics} />
+        <Modifiers {...modifiers} />
+        {fun ? "fun " : ""}interface <Name />
+        <Show when={!isNullish(generics)}>
+          <TypeParameters generics={generics} />
         </Show>
-        <SupertypeList implements={props.extends} />
-        <Show when={!isNullish(props.children)}>
+        <SupertypeList implements={ktExtends} />
+        <Show when={!isNullish(children)}>
           {" "}
           <LexicalScope>
-            <Block>{props.children}</Block>
+            <Block>{children}</Block>
           </LexicalScope>
         </Show>
       </group>

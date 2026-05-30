@@ -1,4 +1,5 @@
 import { Children, Declaration as CoreDeclaration, Namekey, Refkey } from "@alloy-js/core";
+import { isNullish } from "remeda";
 import { KotlinElements, useKotlinNamePolicy } from "../context/createKotlinNamePolicy.js";
 import { useLexicalScope } from "../scope/KotlinLexicalScope.js";
 import { KotlinOutputSymbol } from "../symbol/index.js";
@@ -19,7 +20,7 @@ export type DeclarationProps = {
  */
 export const Declaration = (props: DeclarationProps) => {
   const scope = useLexicalScope();
-  if (!scope) {
+  if (isNullish(scope)) {
     throw new Error("A lexical scope is required for declaration");
   }
 

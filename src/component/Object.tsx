@@ -70,7 +70,7 @@ export type CompanionObjectProps = {
 export const CompanionObject = ({ name, supertypes, children }: CompanionObjectProps) => {
   return (
     <>
-      companion object{name ? ` ${name}` : ""}
+      companion object{isNonNullish(name) ? ` ${name}` : ""}
       <SupertypeList implements={supertypes} />
       <Show when={isNonNullish(children)}>
         {" "}

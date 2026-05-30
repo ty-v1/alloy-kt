@@ -57,7 +57,7 @@ const modifiers: (keyof ModifierProps)[] = [
  * Kotlin modifier keywords.
  */
 export const Modifiers = (props: ModifierProps) => {
-  const modifierList = modifiers.filter((m) => props[m]);
+  const modifierList = modifiers.filter((m) => props[m] ?? false);
 
   return (
     <For each={modifierList} joiner=" " ender=" ">
