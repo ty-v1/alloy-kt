@@ -1,6 +1,7 @@
 import { Block, Children, code, Show } from "@alloy-js/core";
-import { isNonNullish } from "remeda";
+import { isEmptyish, isNonNullish } from "remeda";
 import { useKotlinNamePolicy } from "../context/createKotlinNamePolicy.js";
+import { AnnotationProps, Annotations } from "./Annotation.js";
 import { Modifiers } from "./Modifiers.js";
 import { ParameterDefinition, Parameters } from "./Parameters.js";
 import { TypeParameters, TypeParametersProps } from "./TypeParameters.js";
@@ -30,6 +31,7 @@ export type FunctionProps = TypeParametersProps & {
   readonly infix?: boolean;
   readonly suspend?: boolean;
   readonly tailrec?: boolean;
+  readonly annotations?: AnnotationProps[];
 };
 
 type FunctionBodyProps = {
@@ -61,6 +63,10 @@ export const Function = (props: FunctionProps) => {
 
   return (
     <>
+      <Show when={!isEmptyish(props.annotations)}>
+        <Annotations annotations={props.annotations ?? []} />
+        <hbr />
+      </Show>
       <Modifiers {...props} />
       {"fun "}
       <Show when={isNonNullish(props.generics)}>
