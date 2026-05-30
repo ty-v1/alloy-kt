@@ -59,7 +59,19 @@ describe("TypeArguments", () => {
 
   it("renders nested type arguments", () => {
     const res = renderToString(
-      <TypeArguments args={[{ name: "String" }, { name: <>List<TypeArguments args={[{ name: "Int" }]} /></> }]} />,
+      <TypeArguments
+        args={[
+          { name: "String" },
+          {
+            name: (
+              <>
+                List
+                <TypeArguments args={[{ name: "Int" }]} />
+              </>
+            ),
+          },
+        ]}
+      />,
     );
 
     expect(res).toBe("<String, List<Int>>");
