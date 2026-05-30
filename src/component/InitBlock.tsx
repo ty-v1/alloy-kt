@@ -1,7 +1,7 @@
 import { Block, Children } from "@alloy-js/core";
 
 export type InitBlockProps = {
-  readonly children: Children;
+  readonly children?: Children;
 };
 
 /**
