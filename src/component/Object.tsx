@@ -40,14 +40,7 @@ export type ObjectProps = ObjectDeclaration | CompanionObjectDeclaration;
 /**
  * Kotlin `object` declaration.
  */
-export const KotlinObject = ({
-  name,
-  refkey,
-  children,
-  annotations = [],
-  supertypes = [],
-  ...modifiers
-}: ObjectProps) => {
+export const Object = ({ name, refkey, children, annotations = [], supertypes = [], ...modifiers }: ObjectProps) => {
   const isCompanion = "companion" in modifiers;
   const isAnonymousCompanion = isCompanion && isNullish(name);
   // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
