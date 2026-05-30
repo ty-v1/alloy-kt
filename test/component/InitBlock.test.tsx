@@ -4,7 +4,7 @@ import { InitBlock } from "../../src/component/InitBlock.js";
 
 describe("InitBlock", () => {
   it("renders an init block with a single statement", () => {
-    const res = renderToString(<InitBlock>{"println(\"init\")"}</InitBlock>);
+    const res = renderToString(<InitBlock>{'println("init")'}</InitBlock>);
 
     expect(res).toBe(d`
       init {
@@ -17,13 +17,22 @@ describe("InitBlock", () => {
     const res = renderToString(
       <InitBlock>
         {"require(count > 0)"}
-        {"\n"}
+        <hbr />
         {"name = name.trim()"}
       </InitBlock>,
     );
 
-    expect(res).toContain("init {");
-    expect(res).toContain("require(count > 0)");
-    expect(res).toContain("name = name.trim()");
+    expect(res).toBe(d`
+      init {
+        require(count > 0)
+        name = name.trim()
+      }
+    `);
+  });
+
+  it("renders an empty init block", () => {
+    const res = renderToString(<InitBlock />);
+
+    expect(res).toBe("init {}");
   });
 });
