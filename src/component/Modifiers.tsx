@@ -18,6 +18,7 @@ export type ModifierProps = {
   readonly inline?: boolean;
   readonly value?: boolean;
   readonly annotation?: boolean;
+  readonly companion?: boolean;
   // function / property
   readonly override?: boolean;
   readonly operator?: boolean;
@@ -39,6 +40,7 @@ const modifiers: (keyof ModifierProps)[] = [
   "internal",
   "override",
   "abstract",
+  "companion",
   "open",
   "sealed",
   "annotation",

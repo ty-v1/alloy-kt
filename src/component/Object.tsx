@@ -1,5 +1,5 @@
-import { Block, Children, Namekey, Refkey, Show } from "@alloy-js/core";
-import { isEmptyish, isNonNullish } from "remeda";
+import { Block, Children, namekey, Namekey, Refkey, Show } from "@alloy-js/core";
+import { isEmptyish, isNonNullish, isNullish } from "remeda";
 import { AnnotationProps, Annotations } from "./Annotation.js";
 import { Declaration } from "./Declaration.js";
 import { LexicalScope } from "./LexicalScope.js";
@@ -7,8 +7,7 @@ import { Modifiers } from "./Modifiers.js";
 import { Name } from "./Name.js";
 import { SupertypeList } from "./SupertypeList.js";
 
-export type ObjectProps = {
-  readonly name: string | Namekey;
+type ObjectDeclarationCommon = {
   readonly refkey?: Refkey;
   readonly children?: Children;
   // visibility
@@ -16,66 +15,58 @@ export type ObjectProps = {
   readonly private?: boolean;
   readonly protected?: boolean;
   readonly internal?: boolean;
+  readonly supertypes?: Children[];
+  readonly annotations?: AnnotationProps[];
+};
+
+type ObjectDeclaration = ObjectDeclarationCommon & {
+  readonly name: string | Namekey;
   /**
    * Whether the object is a `data object`.
    */
   readonly data?: boolean;
-  readonly supertypes?: Children[];
-  readonly annotations?: AnnotationProps[];
 };
+
+type CompanionObjectDeclaration = ObjectDeclarationCommon & {
+  /**
+   * @default Companion
+   */
+  readonly name?: string | Namekey;
+  readonly companion: true;
+};
+
+export type ObjectProps = ObjectDeclaration | CompanionObjectDeclaration;
 
 /**
  * Kotlin `object` declaration.
  */
-export const KotlinObject = (props: ObjectProps) => {
+export const Object = ({ name, refkey, children, annotations = [], supertypes = [], ...modifiers }: ObjectProps) => {
+  const isCompanion = "companion" in modifiers;
+  const isAnonymousCompanion = isCompanion && isNullish(name);
+  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+  const objectName = isAnonymousCompanion ? namekey("Companion", { ignoreNamePolicy: true }) : name!;
+
   return (
-    <Declaration {...props} name={props.name} nameKind="class">
-      <Show when={!isEmptyish(props.annotations)}>
-        <Annotations annotations={props.annotations ?? []} />
+    <Declaration refkey={refkey} name={objectName} nameKind="class">
+      <Show when={!isEmptyish(annotations)}>
+        <Annotations annotations={annotations} />
         <hbr />
       </Show>
       <group>
-        <Modifiers {...props} />
-        object <Name />
-        <SupertypeList implements={props.supertypes} />
-        <Show when={isNonNullish(props.children)}>
+        <Modifiers {...modifiers} />
+        object
+        <Show when={!isAnonymousCompanion}>
+          {" "}
+          <Name />
+        </Show>
+        <SupertypeList implements={supertypes} />
+        <Show when={isNonNullish(children)}>
           {" "}
           <LexicalScope>
-            <Block>{props.children}</Block>
+            <Block>{children}</Block>
           </LexicalScope>
         </Show>
       </group>
     </Declaration>
-  );
-};
-
-export type CompanionObjectProps = {
-  /** Optional name. Anonymous when omitted. */
-  readonly name?: string;
-  /** Implemented supertypes. */
-  readonly supertypes?: Children[];
-  readonly children?: Children;
-  readonly annotations?: AnnotationProps[];
-};
-
-/**
- * @deprecated
- * Kotlin `companion object` declaration.
- *
- * Notes:
- * - Must be placed inside a class body. At most one per enclosing class.
- * - Not registered as a named declaration; cannot be referenced by `refkey`.
- */
-// FIXME remove it and add companion modifier to KotlinObject
-export const CompanionObject = ({ name, supertypes, children }: CompanionObjectProps) => {
-  return (
-    <>
-      companion object{isNonNullish(name) ? ` ${name}` : ""}
-      <SupertypeList implements={supertypes} />
-      <Show when={isNonNullish(children)}>
-        {" "}
-        <Block>{children}</Block>
-      </Show>
-    </>
   );
 };
