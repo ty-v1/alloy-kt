@@ -1,5 +1,6 @@
 import { Children, Refkey, Show } from "@alloy-js/core";
-import { isNonNullish } from "remeda";
+import { isEmptyish, isNonNullish } from "remeda";
+import { AnnotationProps, Annotations } from "./Annotation.js";
 import { Declaration } from "./Declaration.js";
 import { Modifiers } from "./Modifiers.js";
 import { Name } from "./Name.js";
@@ -23,6 +24,7 @@ export type PropertyProps = {
   // property-specific
   readonly const?: boolean;
   readonly lateinit?: boolean;
+  readonly annotations?: AnnotationProps[];
 };
 
 /**
@@ -34,6 +36,10 @@ export const Property = (props: PropertyProps) => {
 
   return (
     <Declaration {...props} name={props.name}>
+      <Show when={!isEmptyish(props.annotations)}>
+        <Annotations annotations={props.annotations ?? []} />
+        <hbr />
+      </Show>
       <Modifiers {...props} />
       {keyword} <Name />: {props.type}
       <Show when={isNonNullish(props.initialValue)}> = {props.initialValue}</Show>

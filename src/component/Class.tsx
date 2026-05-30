@@ -1,5 +1,6 @@
 import { Block, Children, Namekey, Refkey, Show } from "@alloy-js/core";
-import { isNullish } from "remeda";
+import { isEmptyish, isNullish } from "remeda";
+import { AnnotationProps, Annotations } from "./Annotation.js";
 import { PrimaryConstructor, PrimaryConstructorProps } from "./Constructor.js";
 import { Declaration } from "./Declaration.js";
 import { LexicalScope } from "./LexicalScope.js";
@@ -40,6 +41,7 @@ export type ClassProps = TypeParametersProps & {
    * @see https://kotlinlang.org/docs/inline-classes.html
    */
   readonly value?: boolean;
+  readonly annotations?: AnnotationProps[];
   readonly primaryConstructor?: PrimaryConstructorProps;
   readonly extends?: Children;
   readonly implements?: Children[];
@@ -51,6 +53,10 @@ export type ClassProps = TypeParametersProps & {
 export const Class = (props: ClassProps) => {
   return (
     <Declaration {...props} name={props.name} nameKind="class">
+      <Show when={!isEmptyish(props.annotations)}>
+        <Annotations annotations={props.annotations ?? []} />
+        <hbr />
+      </Show>
       <group>
         <Modifiers {...props} />
         class <Name />

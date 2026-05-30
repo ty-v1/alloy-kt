@@ -1,5 +1,5 @@
 import { Children, Output } from "@alloy-js/core";
-import { renderToString } from "@alloy-js/core/testing";
+import { d, renderToString } from "@alloy-js/core/testing";
 import { describe, expect, it } from "vitest";
 import { LexicalScope } from "../../src/component/LexicalScope.js";
 import { Property } from "../../src/component/Property.js";
@@ -43,6 +43,15 @@ describe("Property", () => {
   it("renders override val", () => {
     expect(render(<Property override val name="size" type="Int" initialValue="0" />)).toBe(
       "override val size: Int = 0",
+    );
+  });
+
+  it("renders a property with an annotation", () => {
+    expect(render(<Property val name="bar" type="String" annotations={[{ type: "JvmField" }]} />)).toBe(
+      d`
+        @JvmField
+        val bar: String
+        `,
     );
   });
 });
