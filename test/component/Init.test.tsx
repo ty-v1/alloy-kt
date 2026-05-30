@@ -1,10 +1,10 @@
 import { d, renderToString } from "@alloy-js/core/testing";
 import { describe, expect, it } from "vitest";
-import { InitBlock } from "../../src/component/InitBlock.js";
+import { Init } from "../../src/component/Init.js";
 
 describe("InitBlock", () => {
   it("renders an init block with a single statement", () => {
-    const res = renderToString(<InitBlock>{'println("init")'}</InitBlock>);
+    const res = renderToString(<Init>{'println("init")'}</Init>);
 
     expect(res).toBe(d`
       init {
@@ -15,11 +15,11 @@ describe("InitBlock", () => {
 
   it("renders an init block with multiple statements", () => {
     const res = renderToString(
-      <InitBlock>
+      <Init>
         {"require(count > 0)"}
         <hbr />
         {"name = name.trim()"}
-      </InitBlock>,
+      </Init>,
     );
 
     expect(res).toBe(d`
@@ -31,7 +31,7 @@ describe("InitBlock", () => {
   });
 
   it("renders an empty init block", () => {
-    const res = renderToString(<InitBlock />);
+    const res = renderToString(<Init />);
 
     expect(res).toBe("init {}");
   });

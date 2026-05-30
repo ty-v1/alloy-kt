@@ -1,13 +1,13 @@
 import { Block, Children } from "@alloy-js/core";
 
-export type InitBlockProps = {
+export type InitProps = {
   readonly children?: Children;
 };
 
 /**
  * Kotlin initializer block.
  */
-export const InitBlock = ({ children }: InitBlockProps) => {
+export const Init = ({ children }: InitProps) => {
   return (
     <>
       {"init "}
