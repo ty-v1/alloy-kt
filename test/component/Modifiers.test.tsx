@@ -37,7 +37,7 @@ describe("Modifiers", () => {
   it("renders suspend and inline", () => {
     const res = renderToString(<Modifiers inline suspend />);
 
-    expect(res).toBe("inline suspend ");
+    expect(res).toBe("suspend inline ");
   });
 
   it("renders const modifier", () => {

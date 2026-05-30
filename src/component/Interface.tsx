@@ -37,7 +37,6 @@ export const Interface = ({
   annotations = [],
   extends: ktExtends = [],
   generics = {},
-  fun = false,
   children,
   ...modifiers
 }: InterfaceProps) => {
@@ -49,7 +48,7 @@ export const Interface = ({
       </Show>
       <group>
         <Modifiers {...modifiers} />
-        {fun ? "fun " : ""}interface <Name />
+        interface <Name />
         <Show when={!isNullish(generics)}>
           <TypeParameters generics={generics} />
         </Show>

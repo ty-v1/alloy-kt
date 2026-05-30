@@ -5,54 +5,65 @@ import { For } from "@alloy-js/core";
  * Some keywords are only valid in certain contexts.
  */
 export type ModifierProps = {
-  // visibility
   readonly public?: boolean;
-  readonly private?: boolean;
   readonly protected?: boolean;
+  readonly private?: boolean;
   readonly internal?: boolean;
-  // class / member
+  readonly expect?: boolean;
+  readonly actual?: boolean;
+  readonly final?: boolean;
   readonly open?: boolean;
   readonly abstract?: boolean;
   readonly sealed?: boolean;
-  readonly data?: boolean;
+  readonly const?: boolean;
+  readonly external?: boolean;
+  readonly override?: boolean;
+  readonly lateinit?: boolean;
+  readonly tailrec?: boolean;
+  readonly vararg?: boolean;
+  readonly suspend?: boolean;
+  readonly inner?: boolean;
+  readonly enum?: boolean;
+  readonly annotation?: boolean;
+  readonly fun?: boolean;
+  readonly companion?: boolean;
   readonly inline?: boolean;
   readonly value?: boolean;
-  readonly annotation?: boolean;
-  readonly companion?: boolean;
-  // function / property
-  readonly override?: boolean;
-  readonly operator?: boolean;
   readonly infix?: boolean;
-  readonly suspend?: boolean;
-  readonly tailrec?: boolean;
-  // property
-  readonly lateinit?: boolean;
-  readonly const?: boolean;
+  readonly operator?: boolean;
+  readonly data?: boolean;
 };
 
 // Order follows Kotlin coding conventions:
 // https://kotlinlang.org/docs/coding-conventions.html#modifiers-order
-// TODO fix order
 const modifiers: (keyof ModifierProps)[] = [
   "public",
-  "private",
   "protected",
+  "private",
   "internal",
-  "override",
-  "abstract",
-  "companion",
+  "expect",
+  "actual",
+  "final",
   "open",
+  "abstract",
   "sealed",
-  "annotation",
-  "data",
-  "value",
-  "inline",
-  "tailrec",
-  "operator",
-  "infix",
-  "suspend",
   "const",
+  "external",
+  "override",
   "lateinit",
+  "tailrec",
+  "vararg",
+  "suspend",
+  "inner",
+  "enum",
+  "annotation",
+  "fun",
+  "companion",
+  "inline",
+  "value",
+  "infix",
+  "operator",
+  "data",
 ];
 
 /**
