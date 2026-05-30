@@ -1,5 +1,6 @@
 import { Block, Children, Namekey, Refkey, Show } from "@alloy-js/core";
-import { isNonNullish } from "remeda";
+import { isEmptyish, isNonNullish } from "remeda";
+import { AnnotationProps, Annotations } from "./Annotation.js";
 import { Declaration } from "./Declaration.js";
 import { LexicalScope } from "./LexicalScope.js";
 import { Modifiers } from "./Modifiers.js";
@@ -20,6 +21,7 @@ export type ObjectProps = {
    */
   readonly data?: boolean;
   readonly supertypes?: Children[];
+  readonly annotations?: AnnotationProps[];
 };
 
 /**
@@ -28,6 +30,10 @@ export type ObjectProps = {
 export const KotlinObject = (props: ObjectProps) => {
   return (
     <Declaration {...props} name={props.name} nameKind="class">
+      <Show when={!isEmptyish(props.annotations)}>
+        <Annotations annotations={props.annotations ?? []} />
+        <hbr />
+      </Show>
       <group>
         <Modifiers {...props} />
         object <Name />
@@ -49,15 +55,18 @@ export type CompanionObjectProps = {
   /** Implemented supertypes. */
   readonly supertypes?: Children[];
   readonly children?: Children;
+  readonly annotations?: AnnotationProps[];
 };
 
 /**
+ * @deprecated
  * Kotlin `companion object` declaration.
  *
  * Notes:
  * - Must be placed inside a class body. At most one per enclosing class.
  * - Not registered as a named declaration; cannot be referenced by `refkey`.
  */
+// FIXME remove it and add companion modifier to KotlinObject
 export const CompanionObject = ({ name, supertypes, children }: CompanionObjectProps) => {
   return (
     <>
