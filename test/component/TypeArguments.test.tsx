@@ -44,4 +44,24 @@ describe("TypeArguments", () => {
 
     expect(res).toBe("<String, Int>");
   });
+
+  it("renders nothing when args is omitted", () => {
+    const res = renderToString(<TypeArguments />);
+
+    expect(res).toBe("");
+  });
+
+  it("renders nothing when args is empty", () => {
+    const res = renderToString(<TypeArguments args={[]} />);
+
+    expect(res).toBe("");
+  });
+
+  it("renders nested type arguments", () => {
+    const res = renderToString(
+      <TypeArguments args={[{ name: "String" }, { name: <>List<TypeArguments args={[{ name: "Int" }]} /></> }]} />,
+    );
+
+    expect(res).toBe("<String, List<Int>>");
+  });
 });

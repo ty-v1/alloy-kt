@@ -50,4 +50,22 @@ describe("TypeParameters", () => {
 
     expect(res).toBe("<out T, R>");
   });
+
+  it("renders reified with upper bound", () => {
+    const res = renderToString(<TypeParameters generics={{ T: { reified: true, upperBound: "Any" } }} />);
+
+    expect(res).toBe("<reified T : Any>");
+  });
+
+  it("renders nothing when generics is omitted", () => {
+    const res = renderToString(<TypeParameters />);
+
+    expect(res).toBe("");
+  });
+
+  it("renders nothing when generics is empty", () => {
+    const res = renderToString(<TypeParameters generics={{}} />);
+
+    expect(res).toBe("");
+  });
 });
