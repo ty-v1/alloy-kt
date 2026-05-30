@@ -25,6 +25,15 @@ describe("KotlinObject", () => {
       }
     `);
   });
+
+  it("renders an object with an annotation", () => {
+    const res = renderInTestContext(<KotlinObject name="Singleton" annotations={[{ type: "Anno" }]} />);
+
+    expect(res).toContain(d`
+      @Anno
+      object Singleton
+    `);
+  });
 });
 
 describe("CompanionObject", () => {

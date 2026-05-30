@@ -89,4 +89,13 @@ describe("Class", () => {
       value class Wrapper(value: Int)
     `);
   });
+
+  it("renders a class with an annotation", () => {
+    const res = renderInTestContext(<Class name="Foo" annotations={[{ type: "Serializable" }]} />);
+
+    expect(res).toContain(d`
+      @Serializable
+      class Foo
+    `);
+  });
 });
