@@ -1,5 +1,5 @@
 import { Children, code, For, Indent, Show } from "@alloy-js/core";
-import { isArray, isNonNullish } from "remeda";
+import { isArray, isEmpty, isNonNullish } from "remeda";
 
 export type AnnotationProps = {
   readonly type: Children;
@@ -47,6 +47,10 @@ export const Annotation = (props: AnnotationProps) => {
 
 function AnnotationArgs(props: { value: Record<string, Children> }) {
   const entries = Object.entries(props.value);
+
+  if (isEmpty(entries)) {
+    return "";
+  }
 
   if (entries.length === 1 && entries[0][0] === "value") {
     const value = entries[0][1];
