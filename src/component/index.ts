@@ -8,6 +8,7 @@ export * from "./While.js";
 export * from "./Declaration.js";
 export * from "./Enum.js";
 export * from "./Function.js";
+export * from "./Init.js";
 export * from "./Interface.js";
 export * from "./LexicalScope.js";
 export * from "./Modifiers.js";
