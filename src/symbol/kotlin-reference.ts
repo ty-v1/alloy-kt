@@ -15,6 +15,7 @@ export function ref(refkey: Refkey) {
     }
 
     const { symbol } = result.value;
+    // eslint-disable-next-line
     return untrack(() => sourceFile!.addImport(symbol));
   });
 }

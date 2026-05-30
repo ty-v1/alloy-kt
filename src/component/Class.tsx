@@ -50,27 +50,37 @@ export type ClassProps = TypeParametersProps & {
 /**
  * Kotlin `class` declaration.
  */
-export const Class = (props: ClassProps) => {
+export const Class = ({
+  name,
+  refkey,
+  children,
+  annotations = [],
+  primaryConstructor,
+  extends: ktExtends,
+  implements: ktImplements = [],
+  generics = {},
+  ...modifiers
+}: ClassProps) => {
   return (
-    <Declaration {...props} name={props.name} nameKind="class">
-      <Show when={!isEmptyish(props.annotations)}>
-        <Annotations annotations={props.annotations ?? []} />
+    <Declaration refkey={refkey} name={name} nameKind="class">
+      <Show when={!isEmptyish(annotations)}>
+        <Annotations annotations={annotations} />
         <hbr />
       </Show>
       <group>
-        <Modifiers {...props} />
+        <Modifiers {...modifiers} />
         class <Name />
-        <Show when={!isNullish(props.generics)}>
-          <TypeParameters generics={props.generics} />
+        <Show when={!isNullish(generics)}>
+          <TypeParameters generics={generics} />
         </Show>
-        <Show when={!isNullish(props.primaryConstructor)}>
-          <PrimaryConstructor {...props.primaryConstructor!} />
+        <Show when={!isNullish(primaryConstructor)}>
+          <PrimaryConstructor {...primaryConstructor} />
         </Show>
-        <SupertypeList extends={props.extends} implements={props.implements} />
-        <Show when={!isNullish(props.children)}>
+        <SupertypeList extends={ktExtends} implements={ktImplements} />
+        <Show when={!isNullish(children)}>
           {" "}
           <LexicalScope>
-            <Block>{props.children}</Block>
+            <Block>{children}</Block>
           </LexicalScope>
         </Show>
       </group>

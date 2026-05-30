@@ -1,5 +1,5 @@
 import { Block, Children, mapJoin, Show } from "@alloy-js/core";
-import { isNonNullish } from "remeda";
+import { isNonNullish, isTruthy } from "remeda";
 
 export type WhenEntry = {
   /**
@@ -32,7 +32,7 @@ export const When = (props: WhenProps) => {
         {mapJoin(
           () => props.entries,
           (entry) => {
-            const condition = entry.else ? "else" : entry.condition;
+            const condition = isTruthy(entry.else) ? "else" : entry.condition;
             return [condition, " -> ", entry.body];
           },
         )}

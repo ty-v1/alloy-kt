@@ -8,6 +8,7 @@ import {
   useContext,
   useScope,
 } from "@alloy-js/core";
+import { isNonNullish } from "remeda";
 import { KotlinPackageScope } from "../scope/KotlinPackageScope.js";
 
 export interface KotlinPackageDirectoryContext {
@@ -35,7 +36,9 @@ export function PackageDirectory(props: PackageDirectoryProps) {
   const packageNames = props.package.split(".");
   const packageName = packageNames[0];
 
-  const fullyQualifiedPackageName = parentPackage ? parentPackage.qualifiedName + "." + packageName : packageName;
+  const fullyQualifiedPackageName = isNonNullish(parentPackage)
+    ? parentPackage.qualifiedName + "." + packageName
+    : packageName;
 
   const parentScope = useScope();
   const scope = new KotlinPackageScope(fullyQualifiedPackageName, parentScope);

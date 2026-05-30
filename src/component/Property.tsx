@@ -31,18 +31,26 @@ export type PropertyProps = {
  * Kotlin property declaration.
  * `val` is used by default.
  */
-export const Property = (props: PropertyProps) => {
-  const keyword = props.var ? "var" : "val";
+export const Property = ({
+  name,
+  refkey,
+  var: ktVar = false,
+  initialValue,
+  annotations = [],
+  type,
+  ...modifiers
+}: PropertyProps) => {
+  const keyword = ktVar ? "var" : "val";
 
   return (
-    <Declaration {...props} name={props.name}>
-      <Show when={!isEmptyish(props.annotations)}>
-        <Annotations annotations={props.annotations ?? []} />
+    <Declaration refkey={refkey} name={name}>
+      <Show when={!isEmptyish(annotations)}>
+        <Annotations annotations={annotations} />
         <hbr />
       </Show>
-      <Modifiers {...props} />
-      {keyword} <Name />: {props.type}
-      <Show when={isNonNullish(props.initialValue)}> = {props.initialValue}</Show>
+      <Modifiers {...modifiers} />
+      {keyword} <Name />: {type}
+      <Show when={isNonNullish(initialValue)}> = {initialValue}</Show>
     </Declaration>
   );
 };

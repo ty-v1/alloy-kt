@@ -16,28 +16,28 @@ export type PrimaryConstructorProps = ParametersProps & {
  * Kotlin primary constructor.
  * The `constructor` keyword is emitted only when a visibility modifier is set.
  */
-export const PrimaryConstructor = (props: PrimaryConstructorProps) => {
-  const hasModifier = (props.private || props.protected || props.internal || props.public) ?? false;
-  const hasAnnotations = !isEmptyish(props.annotations);
-  const needsKeyword = hasModifier || hasAnnotations;
-  const params = <Parameters parameters={props.parameters} />;
+export const PrimaryConstructor = ({
+  private: ktPrivate = false,
+  protected: ktProtected = false,
+  internal = false,
+  public: ktPublic = false,
+  annotations = [],
+  parameters = {},
+}: PrimaryConstructorProps) => {
+  const hasModifier = ktPrivate || ktProtected || internal || ktPublic;
+  const hasAnnotations = !isEmptyish(annotations);
 
   return (
     <>
-      <Show when={needsKeyword}>
+      <Show when={hasModifier || hasAnnotations}>
         {" "}
         <Show when={hasAnnotations}>
-          <Annotations annotations={props.annotations ?? []} />{" "}
+          <Annotations annotations={annotations} />{" "}
         </Show>
-        <Modifiers
-          public={props.public}
-          private={props.private}
-          protected={props.protected}
-          internal={props.internal}
-        />
+        <Modifiers public={ktPublic} private={ktPrivate} protected={ktProtected} internal={internal} />
         constructor
       </Show>
-      ({params})
+      (<Parameters parameters={parameters} />)
     </>
   );
 };
