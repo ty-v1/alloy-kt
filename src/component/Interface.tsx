@@ -22,7 +22,6 @@ export type InterfaceProps = TypeParametersProps & {
   /**
    * Functional interface.
    */
-  // TODO add fun to Modifiers
   readonly fun?: boolean;
   readonly extends?: Children[];
   readonly annotations?: AnnotationProps[];
