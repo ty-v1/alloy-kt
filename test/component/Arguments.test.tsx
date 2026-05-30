@@ -20,4 +20,10 @@ describe("Arguments", () => {
 
     expect(res).toBe("(42)");
   });
+
+  it("omits nullable elements", () => {
+    const res = renderToString(<Arguments args={["a", null, undefined, "b"]} />);
+
+    expect(res).toBe("(a, b)");
+  });
 });
