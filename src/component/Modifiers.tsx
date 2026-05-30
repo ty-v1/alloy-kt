@@ -17,6 +17,7 @@ export type ModifierProps = {
   readonly data?: boolean;
   readonly inline?: boolean;
   readonly value?: boolean;
+  readonly annotation?: boolean;
   // function / property
   readonly override?: boolean;
   readonly operator?: boolean;
@@ -30,6 +31,7 @@ export type ModifierProps = {
 
 // Order follows Kotlin coding conventions:
 // https://kotlinlang.org/docs/coding-conventions.html#modifiers-order
+// TODO fix order
 const modifiers: (keyof ModifierProps)[] = [
   "public",
   "private",
@@ -39,6 +41,7 @@ const modifiers: (keyof ModifierProps)[] = [
   "abstract",
   "open",
   "sealed",
+  "annotation",
   "data",
   "value",
   "inline",

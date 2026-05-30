@@ -29,6 +29,10 @@ export type ClassProps = TypeParametersProps & {
   readonly open?: boolean;
   readonly abstract?: boolean;
   readonly sealed?: boolean;
+  /**
+   * Whether the class is an `annotation class`.
+   */
+  readonly annotation?: boolean;
   readonly data?: boolean;
   /**
    * Whether the class is a `value class`.
