@@ -25,32 +25,30 @@ export interface TypeArgumentsProps {
  */
 export const TypeArguments = ({ args = [] }: TypeArgumentsProps) => {
   return (
-    <>
-      <Show when={!isEmptyish(args)}>
-        <group>
-          {"<"}
-          <Indent softline trailingBreak>
-            <For each={args} comma line>
-              {(arg) => {
-                if (isString(arg)) {
-                  return arg;
-                }
+    <Show when={!isEmptyish(args)}>
+      <group>
+        {"<"}
+        <Indent softline trailingBreak>
+          <For each={args} comma line>
+            {(arg) => {
+              if (isString(arg)) {
+                return arg;
+              }
 
-                if ("star" in arg) {
-                  return "*";
-                }
+              if ("star" in arg) {
+                return "*";
+              }
 
-                if ("variance" in arg) {
-                  return code`${arg.variance} ${arg.type}`;
-                }
+              if ("variance" in arg) {
+                return code`${arg.variance} ${arg.type}`;
+              }
 
-                return arg.name;
-              }}
-            </For>
-          </Indent>
-          {">"}
-        </group>
-      </Show>
-    </>
+              return arg.name;
+            }}
+          </For>
+        </Indent>
+        {">"}
+      </group>
+    </Show>
   );
 };
