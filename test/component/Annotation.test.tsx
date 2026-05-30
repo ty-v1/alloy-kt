@@ -2,8 +2,6 @@ import { d } from "@alloy-js/core/testing";
 import { renderToString } from "@alloy-js/core/testing";
 import { describe, expect, it } from "vitest";
 import { Annotation, Annotations } from "../../src/component/Annotation.js";
-import { Function } from "../../src/component/Function.js";
-import { renderInTestContext } from "../utils.js";
 
 describe("Annotation", () => {
   it("renders a simple annotation with no args", () => {
