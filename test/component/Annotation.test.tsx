@@ -1,4 +1,4 @@
-import { d , renderToString } from "@alloy-js/core/testing";
+import { d, renderToString } from "@alloy-js/core/testing";
 import { describe, expect, it } from "vitest";
 import { Annotation, Annotations } from "../../src/component/Annotation.js";
 
