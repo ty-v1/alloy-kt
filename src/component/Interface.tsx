@@ -1,5 +1,6 @@
 import { Block, Children, Namekey, Refkey, Show } from "@alloy-js/core";
-import { isNullish } from "remeda";
+import { isEmptyish, isNullish } from "remeda";
+import { AnnotationProps, Annotations } from "./Annotation.js";
 import { Declaration } from "./Declaration.js";
 import { LexicalScope } from "./LexicalScope.js";
 import { Modifiers } from "./Modifiers.js";
@@ -23,6 +24,7 @@ export type InterfaceProps = TypeParametersProps & {
    */
   readonly fun?: boolean;
   readonly extends?: Children[];
+  readonly annotations?: AnnotationProps[];
 };
 
 /**
@@ -31,6 +33,10 @@ export type InterfaceProps = TypeParametersProps & {
 export const Interface = (props: InterfaceProps) => {
   return (
     <Declaration {...props} name={props.name} nameKind="interface">
+      <Show when={!isEmptyish(props.annotations)}>
+        <Annotations annotations={props.annotations ?? []} />
+        <hbr />
+      </Show>
       <group>
         <Modifiers {...props} />
         {props.fun ? "fun " : ""}interface <Name />

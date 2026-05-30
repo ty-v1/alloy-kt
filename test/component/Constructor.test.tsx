@@ -1,4 +1,4 @@
-import { renderToString } from "@alloy-js/core/testing";
+import { d, renderToString } from "@alloy-js/core/testing";
 import { describe, expect, it } from "vitest";
 import { PrimaryConstructor, SecondaryConstructor } from "../../src/component/Constructor.js";
 
@@ -26,6 +26,18 @@ describe("PrimaryConstructor", () => {
 
     expect(res).toBe(" internal constructor()");
   });
+
+  it("forces the constructor keyword when an annotation is set", () => {
+    const res = renderToString(<PrimaryConstructor annotations={[{ type: "Inject" }]} />);
+
+    expect(res).toBe(" @Inject constructor()");
+  });
+
+  it("renders annotation before visibility modifier", () => {
+    const res = renderToString(<PrimaryConstructor private annotations={[{ type: "Inject" }]} />);
+
+    expect(res).toBe(" @Inject private constructor()");
+  });
 });
 
 describe("SecondaryConstructor", () => {
@@ -47,5 +59,14 @@ describe("SecondaryConstructor", () => {
     const res = renderToString(<SecondaryConstructor parameters={{ n: "String" }} delegatedParameters="n" />);
 
     expect(res).toBe("constructor(n: String) : this(n)");
+  });
+
+  it("renders annotation before constructor keyword", () => {
+    const res = renderToString(<SecondaryConstructor annotations={[{ type: "Inject" }]} />);
+
+    expect(res).toBe(d`
+      @Inject
+      constructor()
+    `);
   });
 });
