@@ -1,6 +1,6 @@
-import { d, renderToString } from "@alloy-js/core/testing";
+import { d } from "@alloy-js/core/testing";
 import { describe, expect, it } from "vitest";
-import { CompanionObject, KotlinObject } from "../../src/component/Object.js";
+import { KotlinObject } from "../../src/component/Object.js";
 import { renderInTestContext } from "../utils.js";
 
 describe("KotlinObject", () => {
@@ -26,6 +26,25 @@ describe("KotlinObject", () => {
     `);
   });
 
+  it("renders an anonymous companion object", () => {
+    const res = renderInTestContext(<KotlinObject companion />);
+
+    expect(res).toContain("companion object");
+    expect(res).not.toContain("companion object Companion");
+  });
+
+  it("renders a named companion object", () => {
+    const res = renderInTestContext(<KotlinObject companion name="Factory" />);
+
+    expect(res).toContain("companion object Factory");
+  });
+
+  it("renders a private companion object", () => {
+    const res = renderInTestContext(<KotlinObject companion private />);
+
+    expect(res).toContain("private companion object");
+  });
+
   it("renders an object with an annotation", () => {
     const res = renderInTestContext(<KotlinObject name="Singleton" annotations={[{ type: "Anno" }]} />);
 
@@ -33,25 +52,5 @@ describe("KotlinObject", () => {
       @Anno
       object Singleton
     `);
-  });
-});
-
-describe("CompanionObject", () => {
-  it("renders an unnamed companion object without body", () => {
-    const res = renderToString(<CompanionObject />);
-
-    expect(res).toBe("companion object");
-  });
-
-  it("renders a named companion object without body", () => {
-    const res = renderToString(<CompanionObject name="Factory" />);
-
-    expect(res).toBe("companion object Factory");
-  });
-
-  it("renders a companion object with a supertype", () => {
-    const res = renderToString(<CompanionObject supertypes={["Builder"]} />);
-
-    expect(res).toBe("companion object : Builder");
   });
 });
