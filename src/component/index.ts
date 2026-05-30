@@ -1,3 +1,4 @@
+export * from "./Annotation.js";
 export * from "./Class.js";
 export * from "./Constructor.js";
 export * from "./Declaration.js";
