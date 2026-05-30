@@ -28,7 +28,22 @@ export default defineConfig([
         },
       ],
       "no-unused-vars": "off",
+      "no-extra-boolean-cast": "error",
       "prefer-arrow-callback": "error",
+      "@typescript-eslint/strict-boolean-expressions": [
+        "error",
+        {
+          allowString: false,
+          allowNumber: false,
+          allowNullableObject: false,
+          allowNullableBoolean: false,
+          allowNullableString: false,
+          allowNullableNumber: false,
+          allowAny: false,
+        },
+      ],
+      "@typescript-eslint/no-non-null-assertion": "error",
+      "@typescript-eslint/no-non-null-asserted-optional-chain": "error",
     },
     settings: {
       "import/resolver": {
