@@ -9,15 +9,63 @@ describe("TypeParameters", () => {
     expect(res).toBe("<T>");
   });
 
-  it("renders a type parameter with a bound using colon syntax", () => {
-    const res = renderToString(<TypeParameters generics={{ T: "Comparable<T>" }} />);
+  it("renders a type parameter with a bound", () => {
+    const res = renderToString(<TypeParameters generics={{ T: { upperBound: "Comparable<T>" } }} />);
 
     expect(res).toBe("<T : Comparable<T>>");
   });
 
   it("renders multiple type parameters", () => {
-    const res = renderToString(<TypeParameters generics={{ K: undefined, V: "Any" }} />);
+    const res = renderToString(<TypeParameters generics={{ K: undefined, V: { upperBound: "Any" } }} />);
 
     expect(res).toBe("<K, V : Any>");
+  });
+
+  it("renders a single type parameter with out variance", () => {
+    const res = renderToString(<TypeParameters generics={{ T: { variance: "out" } }} />);
+
+    expect(res).toBe("<out T>");
+  });
+
+  it("renders a single type parameter with in variance", () => {
+    const res = renderToString(<TypeParameters generics={{ T: { variance: "in" } }} />);
+
+    expect(res).toBe("<in T>");
+  });
+
+  it("renders variance with upper bound", () => {
+    const res = renderToString(<TypeParameters generics={{ T: { variance: "out", upperBound: "Any" } }} />);
+
+    expect(res).toBe("<out T : Any>");
+  });
+
+  it("renders reified modifier", () => {
+    const res = renderToString(<TypeParameters generics={{ T: { reified: true } }} />);
+
+    expect(res).toBe("<reified T>");
+  });
+
+  it("renders mixed: one with variance, one without", () => {
+    const res = renderToString(<TypeParameters generics={{ T: { variance: "out" }, R: undefined }} />);
+
+    expect(res).toBe("<out T, R>");
+  });
+
+  it("renders reified with upper bound", () => {
+    const res = renderToString(<TypeParameters generics={{ T: { reified: true, upperBound: "Any" } }} />);
+
+    expect(res).toBe("<reified T : Any>");
+  });
+
+  it("renders nothing when generics is omitted", () => {
+    const res = renderToString(<TypeParameters />);
+
+    expect(res).toBe("");
+  });
+
+  it("renders nothing when generics is empty", () => {
+    const res = renderToString(<TypeParameters generics={{}} />);
+
+    expect(res).toBe("");
   });
 });

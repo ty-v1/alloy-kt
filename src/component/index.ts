@@ -17,6 +17,7 @@ export * from "./Property.js";
 export * from "./Reference.js";
 export * from "./SourceFile.js";
 export * from "./Try.js";
+export * from "./TypeArguments.js";
 export * from "./TypeParameters.js";
 export * from "./Value.js";
 export * from "./Variable.js";
