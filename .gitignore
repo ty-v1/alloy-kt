@@ -379,3 +379,13 @@ $RECYCLE.BIN/
 *.lnk
 
 # End of https://www.toptal.com/developers/gitignore/api/intellij+all,emacs,visualstudiocode,node,windows,macos,vim
+
+.idea/
+
+# AI tools
+.claude/
+.cursor/
+.codex/
+.junie/
+.copilot/
+.gemini/
