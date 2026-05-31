@@ -1,5 +1,5 @@
 import { createNamePolicy, NamePolicy, useNamePolicy } from "@alloy-js/core";
-import { camelCase, constantCase, pascalCase } from "change-case";
+import { capitalize, toCamelCase, toSnakeCase, toUpperCase } from "remeda";
 
 export type KotlinElements =
   | "class"
@@ -25,13 +25,13 @@ export const createKotlinNamePolicy: () => NamePolicy<KotlinElements> = () => {
       case "class":
       case "interface":
       case "enum":
-        return pascalCase(name);
+        return capitalize(toCamelCase(name));
       case "enum-member":
-        return constantCase(name);
+        return toUpperCase(toSnakeCase(name));
       case "constant":
-        return constantCase(name);
+        return toUpperCase(toSnakeCase(name));
       default:
-        return camelCase(name);
+        return toCamelCase(name);
     }
   });
 };
