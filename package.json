@@ -1,12 +1,21 @@
 {
   "name": "alloy-kt",
   "version": "0.1.0",
-  "main": "index.js",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "files": ["dist"],
   "license": "MIT",
   "type": "module",
   "scripts": {
     "test": "vitest run",
     "build": "alloy build",
+    "prepare": "yarn run build",
     "lint:check": "eslint",
     "lint:fix": "eslint --fix",
     "format:check": "prettier --check .",
