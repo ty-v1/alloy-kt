@@ -1,4 +1,4 @@
-import { Component, mapJoin } from "@alloy-js/core";
+import { mapJoin } from "@alloy-js/core";
 import { ImportStatement, ImportStatementProps } from "./ImportStatement.js";
 
 export type ImportStatementsProps = {
@@ -11,7 +11,7 @@ export type ImportStatementsProps = {
 /**
  * Multiple import statements.
  */
-export const ImportStatements: Component<ImportStatementsProps> = (props) => {
+export const ImportStatements = (props: ImportStatementsProps) => {
   return mapJoin(
     () => props.imports,
     (importProps) => () => <ImportStatement {...importProps} />,
