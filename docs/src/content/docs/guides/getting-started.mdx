@@ -1,0 +1,34 @@
+---
+title: Getting Started
+---
+
+import { PackageManagers } from "starlight-package-managers";
+
+## Installation
+
+<PackageManagers type="add" pkg="alloy-kt @alloy-js/core" />
+
+## Basic Usage
+
+```tsx
+import { Output, renderToString } from "@alloy-js/core";
+import { PackageDirectory, SourceFile, Class } from "alloy-kt";
+
+const output = renderToString(
+  <Output>
+    <PackageDirectory package="com.example">
+      <SourceFile path="Greeter.kt">
+        <Class name="Greeter" />
+      </SourceFile>
+    </PackageDirectory>
+  </Output>
+);
+```
+
+The above generates:
+
+```kotlin
+package com.example
+
+class Greeter
+```
