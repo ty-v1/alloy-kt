@@ -15,8 +15,8 @@ export type KotlinElements =
 /**
  * Create a Kotlin name policy.
  *
- * - class, interface, enum, enum-member: PascalCase
- * - constant: CONSTANT_CASE
+ * - class, interface, enum: PascalCase
+ * - enum-member, constant: CONSTANT_CASE
  * - function, parameter, variable, method: camelCase
  */
 export const createKotlinNamePolicy: () => NamePolicy<KotlinElements> = () => {
