@@ -1,0 +1,35 @@
+on:
+  push:
+    tags:
+      - "v*.*.*"
+
+permissions:
+  contents: read
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: "25"
+          cache: "yarn"
+          registry-url: "https://registry.npmjs.org"
+      - run: yarn install --frozen-lockfile
+        name: Install dependencies
+      - name: Verify version matches tag
+        run: |
+          PKG_VERSION=$(jq -r '.version' package.json)
+          TAG_VERSION="${GITHUB_REF_NAME#v}"
+          if [ "$PKG_VERSION" != "$TAG_VERSION" ]; then
+            echo "Error: package.json version ($PKG_VERSION) does not match tag ($TAG_VERSION)"
+            exit 1
+          fi
+      # TODO replace with OIDC
+      - name: Publish to npm
+        run: |
+          yarn config set version-git-tag false
+          yarn publish --new-version "$(jq -r '.version' package.json)"
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
