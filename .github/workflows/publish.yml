@@ -29,6 +29,6 @@ jobs:
           fi
       # TODO replace with OIDC
       - name: Publish to npm
-        run: npm publish --provenance --access public
+        run: yarn npm publish --provenance --access public --staged
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
