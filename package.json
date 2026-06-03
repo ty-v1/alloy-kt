@@ -50,5 +50,9 @@
   },
   "peerDependencies": {
     "@alloy-js/core": "^0.22.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ty-v1/alloy-kt.git"
   }
 }
