@@ -11,7 +11,8 @@
     "declaration": true,
     "jsx": "react-jsx",
     "jsxImportSource": "@alloy-js/core",
-    "rootDir": "src"
+    "rootDir": "src",
+    "sourceMap": true
   },
   "include": ["src/**/*"]
 }
