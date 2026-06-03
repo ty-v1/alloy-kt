@@ -10,7 +10,10 @@
     }
   },
   "files": [
-    "dist"
+    "dist",
+    "LICENSE",
+    "THIRD_PARTY_NOTICES",
+    "README.md"
   ],
   "license": "MIT",
   "type": "module",
