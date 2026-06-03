@@ -25,4 +25,6 @@ export * from "./Value.js";
 export * from "./Variable.js";
 export * from "./ImportStatement.js";
 export * from "./ImportStatements.js";
+export * from "./Name.js";
 export * from "./PackageDirectory.js";
+export * from "./SupertypeList.js";

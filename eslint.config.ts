@@ -6,7 +6,7 @@ import { configs as tsConfigs } from "typescript-eslint";
 
 export default defineConfig([
   {
-    ignores: ["**/dist/"],
+    ignores: ["**/dist/", "**/docs/"],
   },
   jsConfigs.recommended,
   tsConfigs.recommendedTypeChecked,

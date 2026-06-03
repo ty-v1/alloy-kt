@@ -9,8 +9,6 @@ import { LexicalScope } from "./LexicalScope.js";
 import { usePackage } from "./PackageDirectory.js";
 import { Reference } from "./Reference.js";
 
-export { KotlinSourceFileContext };
-
 export type SourceFileProps = {
   /**
    * File path relative to the package directory.
