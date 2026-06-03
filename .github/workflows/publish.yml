@@ -28,8 +28,6 @@ jobs:
           fi
       # TODO replace with OIDC
       - name: Publish to npm
-        run: |
-          yarn config set version-git-tag false
-          yarn publish --new-version "$(jq -r '.version' package.json)"
+        run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
