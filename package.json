@@ -31,6 +31,7 @@
   },
   "devDependencies": {
     "@alloy-js/cli": "^0.22.0",
+    "@alloy-js/core": "^0.22.0",
     "@alloy-js/rollup-plugin": "^0.1.0",
     "@eslint/js": "^9.39.4",
     "@types/node": "^25.5.0",
@@ -40,16 +41,12 @@
     "eslint-config-prettier": "^10.1.8",
     "eslint-import-resolver-typescript": "^4.4.4",
     "eslint-plugin-import": "^2.32.0",
-    "install-peers": "^1.0.4",
     "jest-extended": "^7.0.0",
     "jiti": "^2.6.1",
     "prettier": "^3.8.1",
     "typescript": "^5.9.3",
     "typescript-eslint": "^8.57.1",
     "vitest": "^4.1.0"
-  },
-  "peerDependencies": {
-    "@alloy-js/core": "^0.22.0"
   },
   "repository": {
     "type": "git",
