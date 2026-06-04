@@ -17,8 +17,6 @@ jobs:
           node-version: "25"
           cache: "yarn"
           registry-url: "https://registry.npmjs.org"
-      - run: yarn install --frozen-lockfile
-        name: Install dependencies
       - name: Verify version matches tag
         run: |
           PKG_VERSION=$(jq -r '.version' package.json)
@@ -27,7 +25,10 @@ jobs:
             echo "Error: package.json version ($PKG_VERSION) does not match tag ($TAG_VERSION)"
             exit 1
           fi
-      # TODO replace with OIDC
+      - name: Install dependencies
+        run: yarn install --frozen-lockfile
+      - name: Build
+        run: yarn build
       - name: Publish to npm
         run: yarn npm publish --provenance --access public --staged
         env:
