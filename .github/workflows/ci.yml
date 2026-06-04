@@ -14,6 +14,7 @@ jobs:
         with:
           node-version: "25"
           cache: "yarn"
+      - run: corepack enable
       - run: yarn install --frozen-lockfile
         name: Install dependencies
       - run: yarn test
@@ -27,6 +28,7 @@ jobs:
         with:
           node-version: "25"
           cache: "yarn"
+      - run: corepack enable
       - run: yarn install --frozen-lockfile
         name: Install dependencies
       - uses: reviewdog/action-eslint@556a3fdaf8b4201d4d74d406013386aa4f7dab96
@@ -43,6 +45,7 @@ jobs:
         with:
           node-version: "25"
           cache: "yarn"
+      - run: corepack enable
       - run: yarn install --frozen-lockfile
         name: Install dependencies
       - uses: EPMatt/reviewdog-action-prettier@f691104cbeb4b0299df971275444c64be93c03ae

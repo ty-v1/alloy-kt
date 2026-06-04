@@ -25,6 +25,7 @@ jobs:
             echo "Error: package.json version ($PKG_VERSION) does not match tag ($TAG_VERSION)"
             exit 1
           fi
+      - run: corepack enable
       - name: Install dependencies
         run: yarn install --frozen-lockfile
       - name: Build
