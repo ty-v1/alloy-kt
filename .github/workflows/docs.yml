@@ -24,8 +24,8 @@ jobs:
       - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
         with:
           node-version: "25"
-          cache: yarn
           cache-dependency-path: docs/yarn.lock
+      - run: corepack enable
       - name: Install docs dependencies
         run: yarn install --frozen-lockfile
         working-directory: docs
