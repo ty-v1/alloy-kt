@@ -20,7 +20,6 @@
   "scripts": {
     "test": "vitest run",
     "build": "alloy build",
-    "prepublishOnly": "yarn run build",
     "lint:check": "eslint",
     "lint:fix": "eslint --fix",
     "format:check": "prettier --check .",
