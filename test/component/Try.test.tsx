@@ -7,14 +7,14 @@ import { renderInTestContext } from "../utils.js";
 
 describe("TryCatch", () => {
   it("try-catch with body", () => {
-    const res = renderToString(
+    const res = renderInTestContext(
       <>
         <Try>riskyOperation()</Try>
         <Catch parameter={{ name: "e", type: "IOException" }}>handleError(e)</Catch>
       </>,
     );
 
-    expect(res).toBe(d`
+    expect(res).toContain(d`
       try {
         riskyOperation()
       } catch (e: IOException) {
@@ -24,7 +24,7 @@ describe("TryCatch", () => {
   });
 
   it("try-catch-finally", () => {
-    const res = renderToString(
+    const res = renderInTestContext(
       <>
         <Try>riskyOperation()</Try>
         <Catch parameter={{ name: "e", type: "IOException" }}>handleError(e)</Catch>
@@ -32,7 +32,7 @@ describe("TryCatch", () => {
       </>,
     );
 
-    expect(res).toBe(d`
+    expect(res).toContain(d`
       try {
         riskyOperation()
       } catch (e: IOException) {
@@ -61,7 +61,7 @@ describe("TryCatch", () => {
   });
 
   it("multiple catch blocks", () => {
-    const res = renderToString(
+    const res = renderInTestContext(
       <>
         <Try>riskyOperation()</Try>
         <Catch parameter={{ name: "e", type: "IOException" }}>handleError(e)</Catch>
@@ -70,7 +70,7 @@ describe("TryCatch", () => {
       </>,
     );
 
-    expect(res).toBe(d`
+    expect(res).toContain(d`
       try {
         riskyOperation()
       } catch (e: IOException) {
@@ -84,7 +84,7 @@ describe("TryCatch", () => {
   });
 
   it("empty blocks", () => {
-    const res = renderToString(
+    const res = renderInTestContext(
       <>
         <Try />
         <Catch parameter={{ name: "e", type: "E" }} />
@@ -92,7 +92,7 @@ describe("TryCatch", () => {
       </>,
     );
 
-    expect(res).toBe("try {} catch (e: E) {} finally {}");
+    expect(res).toContain("try {} catch (e: E) {} finally {}");
   });
 
   it("resolves catch parameter via refkey", () => {

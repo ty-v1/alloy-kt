@@ -1,8 +1,7 @@
-import { Block, Children, onCleanup, Refkey, useScope } from "@alloy-js/core";
-import { useKotlinNamePolicy } from "../context/createKotlinNamePolicy.js";
-import { KotlinLexicalScope } from "../scope/KotlinLexicalScope.js";
-import { KotlinOutputSymbol } from "../symbol/KotlinOutputSymbol.js";
+import { Block, Children, Refkey } from "@alloy-js/core";
+import { Declaration } from "./Declaration.js";
 import { LexicalScope } from "./LexicalScope.js";
+import { Name } from "./Name.js";
 
 export type CatchParameter = {
   readonly name: string;
@@ -35,28 +34,18 @@ export const Try = (props: TryCatchProps) => {
 };
 
 export const Catch = (props: CatchClauseProps) => {
-  const parentScope = useScope();
-  const catchScope = new KotlinLexicalScope("catch", parentScope, {});
-
-  // TODO: Extract a createKotlinSymbol() factory like TypeScript's createValueSymbol.
-  const sym = new KotlinOutputSymbol(props.parameter.name, catchScope.symbols, {
-    refkeys: props.parameter.refkey,
-    namePolicy: useKotlinNamePolicy().for("parameter"),
-  });
-
-  onCleanup(() => {
-    sym.delete();
-  });
-
   return (
     <>
-      {" catch ("}
-      {sym.name}
-      {": "}
-      {props.parameter.type}
-      {") "}
-      <LexicalScope value={catchScope}>
-        <Block>{props.children}</Block>
+      {" catch "}
+      <LexicalScope>
+        <Declaration name={props.parameter.name} refkey={props.parameter.refkey} nameKind="parameter">
+          {"("}
+          <Name />
+          {": "}
+          {props.parameter.type}
+          {") "}
+          <Block>{props.children}</Block>
+        </Declaration>
       </LexicalScope>
     </>
   );

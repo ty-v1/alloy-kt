@@ -16,6 +16,7 @@ export default defineConfig([
     languageOptions: {
       parserOptions: {
         projectService: {
+          defaultProject: "./tsconfig.dev.json",
           allowDefaultProject: ["eslint.config.ts", "vitest.config.ts"],
         },
       },
