@@ -1,18 +1,9 @@
 {
+  "extends": "./tsconfig.build.json",
   "compilerOptions": {
-    "target": "ESNext",
-    "module": "NodeNext",
-    "moduleResolution": "NodeNext",
-    "esModuleInterop": true,
-    "forceConsistentCasingInFileNames": true,
-    "strict": true,
-    "skipLibCheck": true,
-    "outDir": "dist",
-    "declaration": true,
-    "jsx": "react-jsx",
-    "jsxImportSource": "@alloy-js/core",
-    "rootDir": "src",
-    "sourceMap": true
+    "rootDir": ".",
+    "noEmit": true,
+    "types": ["vitest/globals", "jest-extended"]
   },
-  "include": ["src/**/*"]
+  "include": ["src/**/*", "test/**/*", "*.ts"]
 }

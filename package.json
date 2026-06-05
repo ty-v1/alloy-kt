@@ -19,7 +19,7 @@
   "type": "module",
   "scripts": {
     "test": "vitest run",
-    "build": "alloy build",
+    "build": "vite build",
     "lint:check": "eslint",
     "lint:fix": "eslint --fix",
     "format:check": "prettier --check .",
@@ -29,10 +29,11 @@
     "remeda": "^2.33.6"
   },
   "devDependencies": {
-    "@alloy-js/cli": "^0.22.0",
     "@alloy-js/core": "^0.22.0",
     "@alloy-js/rollup-plugin": "^0.1.0",
+    "@babel/core": "^7.29.7",
     "@eslint/js": "^9.39.4",
+    "@types/babel__core": "^7",
     "@types/node": "^25.5.0",
     "@typescript-eslint/eslint-plugin": "^8.57.1",
     "@typescript-eslint/parser": "^8.57.1",
@@ -45,6 +46,8 @@
     "prettier": "^3.8.1",
     "typescript": "^5.9.3",
     "typescript-eslint": "^8.57.1",
+    "unplugin-dts": "^1.0.2",
+    "vite": "^8.0.16",
     "vitest": "^4.1.0"
   },
   "repository": {
