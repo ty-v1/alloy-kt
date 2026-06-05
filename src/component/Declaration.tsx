@@ -2,7 +2,7 @@ import { Children, Declaration as CoreDeclaration, Namekey, Refkey } from "@allo
 import { isNullish } from "remeda";
 import { KotlinElements, useKotlinNamePolicy } from "../context/createKotlinNamePolicy.js";
 import { useLexicalScope } from "../scope/KotlinLexicalScope.js";
-import { KotlinOutputSymbol } from "../symbol/index.js";
+import { useKotlinSymbol } from "../symbol/index.js";
 
 export type DeclarationProps = {
   readonly name: string | Namekey;
@@ -24,7 +24,7 @@ export const Declaration = (props: DeclarationProps) => {
     throw new Error("A lexical scope is required for declaration");
   }
 
-  const sym = new KotlinOutputSymbol(props.name, scope.symbols, {
+  const sym = useKotlinSymbol(props.name, {
     refkeys: props.refkey,
     namePolicy: useKotlinNamePolicy().for(props.nameKind),
   });
