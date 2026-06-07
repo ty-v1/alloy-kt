@@ -67,6 +67,18 @@ describe("Function", () => {
     expect(res).toBe("private fun helper()");
   });
 
+  it("renders expect function", () => {
+    const res = renderToString(<Function expect name="helper" />);
+
+    expect(res).toBe("expect fun helper()");
+  });
+
+  it("renders actual function", () => {
+    const res = renderToString(<Function actual name="helper" />);
+
+    expect(res).toBe("actual fun helper()");
+  });
+
   it("renders abstract interface method without body", () => {
     const res = renderToString(<Function abstract name="draw" returnType="Unit" />);
 

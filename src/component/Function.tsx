@@ -31,6 +31,8 @@ export type FunctionProps = TypeParametersProps & {
   readonly infix?: boolean;
   readonly suspend?: boolean;
   readonly tailrec?: boolean;
+  readonly expect?: boolean;
+  readonly actual?: boolean;
   readonly annotations?: AnnotationProps[];
 };
 
