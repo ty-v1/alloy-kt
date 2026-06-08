@@ -17,6 +17,10 @@ export type EnumProps = {
   readonly private?: boolean;
   readonly protected?: boolean;
   readonly internal?: boolean;
+  /**
+   * Using external modifier will be an error in feature releases.
+   */
+  readonly external?: boolean;
   readonly annotations?: AnnotationProps[];
   readonly primaryConstructor?: PrimaryConstructorProps;
   readonly implements?: Children[];

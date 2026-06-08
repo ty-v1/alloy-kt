@@ -23,6 +23,7 @@ export type InterfaceProps = TypeParametersProps & {
    * Functional interface.
    */
   readonly fun?: boolean;
+  readonly external?: boolean;
   readonly extends?: Children[];
   readonly annotations?: AnnotationProps[];
 };
