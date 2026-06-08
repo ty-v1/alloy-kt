@@ -106,4 +106,10 @@ describe("Class", () => {
       class Foo
     `);
   });
+
+  it("renders external class", () => {
+    const res = renderInTestContext(<Class external name="Foo" />);
+
+    expect(res).toContain("external class Foo");
+  });
 });

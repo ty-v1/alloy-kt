@@ -84,4 +84,10 @@ describe("Function", () => {
 
     expect(res).toBe("abstract fun draw(): Unit");
   });
+
+  it("renders external function", () => {
+    const res = renderToString(<Function external name="fetch" />);
+
+    expect(res).toBe("external fun fetch()");
+  });
 });

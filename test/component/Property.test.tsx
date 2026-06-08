@@ -54,4 +54,8 @@ describe("Property", () => {
         `,
     );
   });
+
+  it("renders external property", () => {
+    expect(render(<Property external val name="count" type="Int" />)).toBe("external val count: Int");
+  });
 });
