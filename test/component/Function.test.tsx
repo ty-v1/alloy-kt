@@ -84,4 +84,10 @@ describe("Function", () => {
 
     expect(res).toBe("abstract fun draw(): Unit");
   });
+
+  it("renders function with vararg parameter", () => {
+    const res = renderToString(<Function name="greet" parameters={{ names: { type: "String", vararg: true } }} />);
+
+    expect(res).toBe("fun greet(vararg names: String)");
+  });
 });

@@ -39,4 +39,18 @@ describe("Parameters", () => {
 
     expect(res).toBe('name: String, greeting: String = "Hello"');
   });
+
+  it("renders a vararg parameter", () => {
+    const res = renderToString(<Parameters parameters={{ names: { type: "String", vararg: true } }} />);
+
+    expect(res).toBe("vararg names: String");
+  });
+
+  it("renders a vararg parameter with a default value", () => {
+    const res = renderToString(
+      <Parameters parameters={{ names: { type: "String", vararg: true, default: "arrayOf()" } }} />,
+    );
+
+    expect(res).toBe("vararg names: String = arrayOf()");
+  });
 });

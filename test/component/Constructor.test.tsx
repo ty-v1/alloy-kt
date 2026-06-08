@@ -69,4 +69,18 @@ describe("SecondaryConstructor", () => {
       constructor()
     `);
   });
+
+  it("renders vararg parameter", () => {
+    const res = renderToString(<SecondaryConstructor parameters={{ items: { type: "String", vararg: true } }} />);
+
+    expect(res).toBe("constructor(vararg items: String)");
+  });
+});
+
+describe("PrimaryConstructor vararg", () => {
+  it("renders vararg parameter", () => {
+    const res = renderToString(<PrimaryConstructor parameters={{ items: { type: "String", vararg: true } }} />);
+
+    expect(res).toBe("(vararg items: String)");
+  });
 });
