@@ -39,6 +39,12 @@ describe("Enum", () => {
       }
     `);
   });
+
+  it("renders external enum class", () => {
+    const res = renderInTestContext(<Enum external name="Color" />);
+
+    expect(res).toContain("external enum class Color");
+  });
 });
 
 describe("EnumMember", () => {
@@ -59,11 +65,5 @@ describe("EnumMember", () => {
       @Anno
       enum class Color
     `);
-  });
-
-  it("renders external enum class", () => {
-    const res = renderInTestContext(<Enum external name="Color" />);
-
-    expect(res).toContain("external enum class Color");
   });
 });
