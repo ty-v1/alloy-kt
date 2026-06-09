@@ -18,7 +18,10 @@ export type EnumProps = {
   readonly protected?: boolean;
   readonly internal?: boolean;
   /**
-   * @deprecated `external enum class` is deprecated in Kotlin and will become a compiler error in a future release.
+   * Whether an enum class is external.
+   *
+   * @remarks
+   * `external enum class` is deprecated in Kotlin and will become a compiler error in a future release.
    * Avoid using this modifier on enum declarations.
    */
   readonly external?: boolean;
