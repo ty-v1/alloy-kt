@@ -12,6 +12,7 @@ export type PropertyProps = {
   readonly val?: boolean;
   readonly var?: boolean;
   readonly initialValue?: Children;
+  readonly by?: Children;
   // visibility
   readonly public?: boolean;
   readonly private?: boolean;
@@ -39,6 +40,7 @@ export const Property = ({
   initialValue,
   annotations = [],
   type,
+  by,
   ...modifiers
 }: PropertyProps) => {
   const keyword = ktVar ? "var" : "val";
@@ -52,6 +54,7 @@ export const Property = ({
       <Modifiers {...modifiers} />
       {keyword} <Name />: {type}
       <Show when={isNonNullish(initialValue)}> = {initialValue}</Show>
+      <Show when={isNonNullish(by)}> by {by}</Show>
     </Declaration>
   );
 };
