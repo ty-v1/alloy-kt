@@ -1,12 +1,13 @@
-import { Children, mapJoin, Show } from "@alloy-js/core";
+import { Children, code, mapJoin, Show } from "@alloy-js/core";
 import { isPlainObject, isNonNullish } from "remeda";
 
 /**
- * Kotlin parameter definition with type and optional default value.
+ * Kotlin parameter definition.
  */
 export type ParameterDefinition = {
   readonly type: Children;
   readonly default?: Children;
+  readonly vararg?: boolean;
 };
 
 export type ParametersProps = {
@@ -21,23 +22,27 @@ function isParameterDefinition(v: ParameterDefinition | Children): v is Paramete
 }
 
 /**
- * Kotlin parameter list, e.g. `name: Type, name: Type = default`.
+ * Kotlin parameter list.
  */
 export const Parameters = ({ parameters = {} }: ParametersProps) => {
   return mapJoin(
     () => Object.entries(parameters),
     ([name, defn]) => {
-      const type = isParameterDefinition(defn) ? defn.type : defn;
-      const defaultVal = isParameterDefinition(defn) ? defn.default : undefined;
+      if (!isParameterDefinition(defn)) {
+        return code`${name}: ${defn}`;
+      }
+
+      const { type, default: defaultValue, vararg = false } = defn;
 
       return (
         <>
+          <Show when={vararg}>{"vararg "}</Show>
           {name}
           {": "}
           {type}
-          <Show when={isNonNullish(defaultVal)}>
+          <Show when={isNonNullish(defaultValue)}>
             {" = "}
-            {defaultVal}
+            {defaultValue}
           </Show>
         </>
       );
