@@ -89,4 +89,27 @@ describe("Class", () => {
       value class Wrapper(value: Int)
     `);
   });
+
+  it("renders an annotation class", () => {
+    const res = renderInTestContext(
+      <Class annotation name="Annotation" primaryConstructor={{ parameters: { value: "Int" } }} />,
+    );
+
+    expect(res).toContain("annotation class Annotation(value: Int)");
+  });
+
+  it("renders a class with an annotation", () => {
+    const res = renderInTestContext(<Class name="Foo" annotations={[{ type: "Serializable" }]} />);
+
+    expect(res).toContain(d`
+      @Serializable
+      class Foo
+    `);
+  });
+
+  it("renders external class", () => {
+    const res = renderInTestContext(<Class external name="Foo" />);
+
+    expect(res).toContain("external class Foo");
+  });
 });

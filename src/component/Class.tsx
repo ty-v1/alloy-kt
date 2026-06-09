@@ -1,5 +1,6 @@
 import { Block, Children, Namekey, Refkey, Show } from "@alloy-js/core";
-import { isNullish } from "remeda";
+import { isEmptyish, isNullish } from "remeda";
+import { AnnotationProps, Annotations } from "./Annotation.js";
 import { PrimaryConstructor, PrimaryConstructorProps } from "./Constructor.js";
 import { Declaration } from "./Declaration.js";
 import { LexicalScope } from "./LexicalScope.js";
@@ -28,6 +29,10 @@ export type ClassProps = TypeParametersProps & {
   readonly open?: boolean;
   readonly abstract?: boolean;
   readonly sealed?: boolean;
+  /**
+   * Whether the class is an `annotation class`.
+   */
+  readonly annotation?: boolean;
   readonly data?: boolean;
   /**
    * Whether the class is a `value class`.
@@ -36,6 +41,8 @@ export type ClassProps = TypeParametersProps & {
    * @see https://kotlinlang.org/docs/inline-classes.html
    */
   readonly value?: boolean;
+  readonly external?: boolean;
+  readonly annotations?: AnnotationProps[];
   readonly primaryConstructor?: PrimaryConstructorProps;
   readonly extends?: Children;
   readonly implements?: Children[];
@@ -44,23 +51,37 @@ export type ClassProps = TypeParametersProps & {
 /**
  * Kotlin `class` declaration.
  */
-export const Class = (props: ClassProps) => {
+export const Class = ({
+  name,
+  refkey,
+  children,
+  annotations = [],
+  primaryConstructor,
+  extends: ktExtends,
+  implements: ktImplements = [],
+  generics = {},
+  ...modifiers
+}: ClassProps) => {
   return (
-    <Declaration {...props} name={props.name} nameKind="class">
+    <Declaration refkey={refkey} name={name} nameKind="class">
+      <Show when={!isEmptyish(annotations)}>
+        <Annotations annotations={annotations} />
+        <hbr />
+      </Show>
       <group>
-        <Modifiers {...props} />
+        <Modifiers {...modifiers} />
         class <Name />
-        <Show when={!isNullish(props.generics)}>
-          <TypeParameters generics={props.generics} />
+        <Show when={!isNullish(generics)}>
+          <TypeParameters generics={generics} />
         </Show>
-        <Show when={!isNullish(props.primaryConstructor)}>
-          <PrimaryConstructor {...props.primaryConstructor!} />
+        <Show when={!isNullish(primaryConstructor)}>
+          <PrimaryConstructor {...primaryConstructor} />
         </Show>
-        <SupertypeList extends={props.extends} implements={props.implements} />
-        <Show when={!isNullish(props.children)}>
+        <SupertypeList extends={ktExtends} implements={ktImplements} />
+        <Show when={!isNullish(children)}>
           {" "}
           <LexicalScope>
-            <Block>{props.children}</Block>
+            <Block>{children}</Block>
           </LexicalScope>
         </Show>
       </group>

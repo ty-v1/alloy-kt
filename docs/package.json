@@ -1,0 +1,21 @@
+{
+  "name": "alloy-kotlin-docs",
+  "type": "module",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview"
+  },
+  "dependencies": {
+    "@astrojs/starlight": "^0.39.2",
+    "astro": "^6.4.2",
+    "starlight-package-managers": "^0.12.0",
+    "starlight-typedoc": "^0.23.0",
+    "typedoc": "^0.28.19",
+    "typedoc-plugin-markdown": "^4.11.0",
+    "typescript": "^6.0.3"
+  },
+  "packageManager": "yarn@4.16.0"
+}

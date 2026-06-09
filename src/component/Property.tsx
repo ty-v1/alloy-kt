@@ -1,5 +1,8 @@
 import { Children, For, Refkey, Show } from "@alloy-js/core";
 import { isNonNullish } from "remeda";
+import { Children, Refkey, Show } from "@alloy-js/core";
+import { isEmptyish, isNonNullish } from "remeda";
+import { AnnotationProps, Annotations } from "./Annotation.js";
 import { Declaration } from "./Declaration.js";
 import { Modifiers } from "./Modifiers.js";
 import { Name } from "./Name.js";
@@ -24,21 +27,36 @@ export type PropertyProps = {
   // property-specific
   readonly const?: boolean;
   readonly lateinit?: boolean;
+  readonly external?: boolean;
+  readonly annotations?: AnnotationProps[];
 };
 
 /**
  * Kotlin property declaration.
  * `val` is used by default.
  */
-export const Property = (props: PropertyProps) => {
-  const keyword = props.var ? "var" : "val";
+export const Property = ({
+  name,
+  refkey,
+  var: ktVar = false,
+  initialValue,
+  annotations = [],
+  type,
+  by,
+  ...modifiers
+}: PropertyProps) => {
+  const keyword = ktVar ? "var" : "val";
 
   return (
-    <Declaration {...props} name={props.name}>
-      <Modifiers {...props} />
-      {keyword} <Name />: {props.type}
-      <Show when={isNonNullish(props.initialValue)}> = {props.initialValue}</Show>
-      <Show when={isNonNullish(props.by)}> by {props.by}</Show>
+    <Declaration refkey={refkey} name={name}>
+      <Show when={!isEmptyish(annotations)}>
+        <Annotations annotations={annotations} />
+        <hbr />
+      </Show>
+      <Modifiers {...modifiers} />
+      {keyword} <Name />: {type}
+      <Show when={isNonNullish(initialValue)}> = {initialValue}</Show>
+      <Show when={isNonNullish(by)}> by {by}</Show>
     </Declaration>
   );
 };

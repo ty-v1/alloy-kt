@@ -1,5 +1,6 @@
 import { Block, Children, Namekey, Refkey, Show } from "@alloy-js/core";
-import { isNullish } from "remeda";
+import { isEmptyish, isNullish } from "remeda";
+import { AnnotationProps, Annotations } from "./Annotation.js";
 import { Declaration } from "./Declaration.js";
 import { LexicalScope } from "./LexicalScope.js";
 import { Modifiers } from "./Modifiers.js";
@@ -22,26 +23,40 @@ export type InterfaceProps = TypeParametersProps & {
    * Functional interface.
    */
   readonly fun?: boolean;
+  readonly external?: boolean;
   readonly extends?: Children[];
+  readonly annotations?: AnnotationProps[];
 };
 
 /**
  * Kotlin `interface` declaration.
  */
-export const Interface = (props: InterfaceProps) => {
+export const Interface = ({
+  refkey,
+  name,
+  annotations = [],
+  extends: ktExtends = [],
+  generics = {},
+  children,
+  ...modifiers
+}: InterfaceProps) => {
   return (
-    <Declaration {...props} name={props.name} nameKind="interface">
+    <Declaration refkey={refkey} name={name} nameKind="interface">
+      <Show when={!isEmptyish(annotations)}>
+        <Annotations annotations={annotations} />
+        <hbr />
+      </Show>
       <group>
-        <Modifiers {...props} />
-        {props.fun ? "fun " : ""}interface <Name />
-        <Show when={!isNullish(props.generics)}>
-          <TypeParameters generics={props.generics} />
+        <Modifiers {...modifiers} />
+        interface <Name />
+        <Show when={!isNullish(generics)}>
+          <TypeParameters generics={generics} />
         </Show>
-        <SupertypeList implements={props.extends} />
-        <Show when={!isNullish(props.children)}>
+        <SupertypeList implements={ktExtends} />
+        <Show when={!isNullish(children)}>
           {" "}
           <LexicalScope>
-            <Block>{props.children}</Block>
+            <Block>{children}</Block>
           </LexicalScope>
         </Show>
       </group>

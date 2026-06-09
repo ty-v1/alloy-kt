@@ -1,4 +1,4 @@
-import { Component } from "@alloy-js/core";
+import { isEmptyish } from "remeda";
 
 export type ImportStatementProps = {
   /**
@@ -29,11 +29,11 @@ export type ImportStatementProps = {
 /**
  * Kotlin import statement.
  */
-export const ImportStatement: Component<ImportStatementProps> = (props) => {
-  if (props.wildcard) {
-    return `import ${props.package}.*`;
+export const ImportStatement = ({ wildcard = false, name, alias, package: pkg }: ImportStatementProps) => {
+  if (wildcard) {
+    return `import ${pkg}.*`;
   } else {
-    const alias = props.alias ? ` as ${props.alias}` : "";
-    return `import ${props.package}.${props.name}${alias}`;
+    const as = !isEmptyish(alias) ? ` as ${alias}` : "";
+    return `import ${pkg}.${name}${as}`;
   }
 };

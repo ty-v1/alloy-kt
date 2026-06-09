@@ -1,6 +1,7 @@
 import { Block, Children, For, Indent, Namekey, Refkey, Show } from "@alloy-js/core";
 import { isEmptyish, isNonNullish } from "remeda";
 import { useKotlinNamePolicy } from "../context/createKotlinNamePolicy.js";
+import { AnnotationProps, Annotations } from "./Annotation.js";
 import { PrimaryConstructor, PrimaryConstructorProps } from "./Constructor.js";
 import { Declaration } from "./Declaration.js";
 import { LexicalScope } from "./LexicalScope.js";
@@ -16,6 +17,15 @@ export type EnumProps = {
   readonly private?: boolean;
   readonly protected?: boolean;
   readonly internal?: boolean;
+  /**
+   * Whether an enum class is external.
+   *
+   * @remarks
+   * `external enum class` is deprecated in Kotlin and will become a compiler error in a future release.
+   * Avoid using this modifier on enum declarations.
+   */
+  readonly external?: boolean;
+  readonly annotations?: AnnotationProps[];
   readonly primaryConstructor?: PrimaryConstructorProps;
   readonly implements?: Children[];
 };
@@ -26,6 +36,10 @@ export type EnumProps = {
 export const Enum = (props: EnumProps) => {
   return (
     <Declaration {...props} name={props.name} nameKind="enum">
+      <Show when={!isEmptyish(props.annotations)}>
+        <Annotations annotations={props.annotations ?? []} />
+        <hbr />
+      </Show>
       <group>
         <Modifiers {...props} />
         enum class <Name />

@@ -1,25 +1,39 @@
 {
-  "name": "allojs-kt",
-  "version": "1.0.0",
-  "main": "index.js",
+  "name": "alloy-kt",
+  "version": "0.1.0",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "files": [
+    "dist",
+    "LICENSE",
+    "THIRD_PARTY_NOTICES",
+    "README.md"
+  ],
   "license": "MIT",
   "type": "module",
   "scripts": {
     "test": "vitest run",
-    "build": "alloy build",
+    "build": "vite build",
     "lint:check": "eslint",
     "lint:fix": "eslint --fix",
     "format:check": "prettier --check .",
     "format": "prettier --write ."
   },
   "dependencies": {
-    "@alloy-js/java": "^0.22.0",
     "remeda": "^2.33.6"
   },
   "devDependencies": {
-    "@alloy-js/cli": "^0.22.0",
+    "@alloy-js/core": "^0.22.0",
     "@alloy-js/rollup-plugin": "^0.1.0",
+    "@babel/core": "^7.29.7",
     "@eslint/js": "^9.39.4",
+    "@types/babel__core": "^7",
     "@types/node": "^25.5.0",
     "@typescript-eslint/eslint-plugin": "^8.57.1",
     "@typescript-eslint/parser": "^8.57.1",
@@ -27,15 +41,18 @@
     "eslint-config-prettier": "^10.1.8",
     "eslint-import-resolver-typescript": "^4.4.4",
     "eslint-plugin-import": "^2.32.0",
-    "install-peers": "^1.0.4",
     "jest-extended": "^7.0.0",
     "jiti": "^2.6.1",
     "prettier": "^3.8.1",
     "typescript": "^5.9.3",
     "typescript-eslint": "^8.57.1",
+    "unplugin-dts": "^1.0.2",
+    "vite": "^8.0.16",
     "vitest": "^4.1.0"
   },
-  "peerDependencies": {
-    "@alloy-js/core": "^0.22.0"
-  }
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ty-v1/alloy-kt.git"
+  },
+  "packageManager": "yarn@4.16.0"
 }

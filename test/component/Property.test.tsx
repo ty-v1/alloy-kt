@@ -1,5 +1,5 @@
 import { Children, Output } from "@alloy-js/core";
-import { renderToString } from "@alloy-js/core/testing";
+import { d, renderToString } from "@alloy-js/core/testing";
 import { describe, expect, it } from "vitest";
 import { LexicalScope } from "../../src/component/LexicalScope.js";
 import { Property } from "../../src/component/Property.js";
@@ -45,6 +45,20 @@ describe("Property", () => {
       "override val size: Int = 0",
     );
   });
+
+  it("renders a property with an annotation", () => {
+    expect(render(<Property val name="bar" type="String" annotations={[{ type: "JvmField" }]} />)).toBe(
+      d`
+        @JvmField
+        val bar: String
+        `,
+    );
+  });
+
+  it("renders external property", () => {
+    expect(render(<Property external val name="count" type="Int" />)).toBe("external val count: Int");
+  });
+
 
   it("renders delegated val", () => {
     expect(render(<Property val name="value" type="String" by="delegate" />)).toBe(

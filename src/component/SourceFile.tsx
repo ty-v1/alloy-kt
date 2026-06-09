@@ -9,8 +9,6 @@ import { LexicalScope } from "./LexicalScope.js";
 import { usePackage } from "./PackageDirectory.js";
 import { Reference } from "./Reference.js";
 
-export { KotlinSourceFileContext };
-
 export type SourceFileProps = {
   /**
    * File path relative to the package directory.
@@ -40,10 +38,14 @@ export const SourceFile = (props: SourceFileProps) => {
 
   function addImport(symbol: KotlinOutputSymbol): string {
     if (importedSymbols.has(symbol)) {
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
       return importedSymbols.get(symbol)!;
     }
 
-    if (symbol.package !== packageCtx!.qualifiedName && !symbol.package?.startsWith("kotlin.")) {
+    const qualifiedName = packageCtx?.qualifiedName;
+    const pkg = symbol.package ?? "";
+
+    if (symbol.package !== qualifiedName && !pkg.startsWith("kotlin.")) {
       importRecords.push({
         package: symbol.package ?? "",
         name: symbol.name,

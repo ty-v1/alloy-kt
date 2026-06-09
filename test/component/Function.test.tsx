@@ -67,9 +67,33 @@ describe("Function", () => {
     expect(res).toBe("private fun helper()");
   });
 
+  it("renders expect function", () => {
+    const res = renderToString(<Function expect name="helper" />);
+
+    expect(res).toBe("expect fun helper()");
+  });
+
+  it("renders actual function", () => {
+    const res = renderToString(<Function actual name="helper" />);
+
+    expect(res).toBe("actual fun helper()");
+  });
+
   it("renders abstract interface method without body", () => {
     const res = renderToString(<Function abstract name="draw" returnType="Unit" />);
 
     expect(res).toBe("abstract fun draw(): Unit");
+  });
+
+  it("renders function with vararg parameter", () => {
+    const res = renderToString(<Function name="greet" parameters={{ names: { type: "String", vararg: true } }} />);
+
+    expect(res).toBe("fun greet(vararg names: String)");
+  });
+
+  it("renders external function", () => {
+    const res = renderToString(<Function external name="fetch" />);
+
+    expect(res).toBe("external fun fetch()");
   });
 });

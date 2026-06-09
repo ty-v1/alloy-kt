@@ -1,6 +1,6 @@
 import { ContentOutputFile, OutputDirectory, OutputFile } from "@alloy-js/core";
 import { dedent } from "@alloy-js/core/testing";
-import { isNullish } from "remeda";
+import { isNonNullish, isNullish } from "remeda";
 
 export function toHaveFileContents(received: OutputDirectory, expectedFiles: Record<string, string>) {
   for (const [path, rawExpected] of Object.entries(expectedFiles)) {
@@ -29,7 +29,7 @@ function findFileWorker(res: OutputDirectory, path: string): OutputFile | undefi
       }
     } else {
       const found = findFileWorker(item, path);
-      if (found) {
+      if (isNonNullish(found)) {
         return found;
       }
     }

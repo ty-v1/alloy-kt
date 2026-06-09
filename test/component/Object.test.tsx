@@ -1,23 +1,23 @@
-import { d, renderToString } from "@alloy-js/core/testing";
+import { d } from "@alloy-js/core/testing";
 import { describe, expect, it } from "vitest";
-import { CompanionObject, KotlinObject } from "../../src/component/Object.js";
+import { Object } from "../../src/component/Object.js";
 import { renderInTestContext } from "../utils.js";
 
-describe("KotlinObject", () => {
+describe("Object", () => {
   it("renders a simple object declaration without body", () => {
-    const res = renderInTestContext(<KotlinObject name="Singleton" />);
+    const res = renderInTestContext(<Object name="Singleton" />);
 
     expect(res).toContain("object Singleton");
   });
 
   it("renders an object with a supertype", () => {
-    const res = renderInTestContext(<KotlinObject name="Config" supertypes={["Serializable"]} />);
+    const res = renderInTestContext(<Object name="Config" supertypes={["Serializable"]} />);
 
     expect(res).toContain("object Config : Serializable");
   });
 
   it("renders an object with body", () => {
-    const res = renderInTestContext(<KotlinObject name="Singleton">{"val instance = Singleton"}</KotlinObject>);
+    const res = renderInTestContext(<Object name="Singleton">{"val instance = Singleton"}</Object>);
 
     expect(res).toContain(d`
       object Singleton {
@@ -25,24 +25,44 @@ describe("KotlinObject", () => {
       }
     `);
   });
-});
 
-describe("CompanionObject", () => {
-  it("renders an unnamed companion object without body", () => {
-    const res = renderToString(<CompanionObject />);
+  it("renders an anonymous companion object", () => {
+    const res = renderInTestContext(<Object companion />);
 
-    expect(res).toBe("companion object");
+    expect(res).toContain("companion object");
+    expect(res).not.toContain("companion object Companion");
   });
 
-  it("renders a named companion object without body", () => {
-    const res = renderToString(<CompanionObject name="Factory" />);
+  it("renders a named companion object", () => {
+    const res = renderInTestContext(<Object companion name="Factory" />);
 
-    expect(res).toBe("companion object Factory");
+    expect(res).toContain("companion object Factory");
   });
 
-  it("renders a companion object with a supertype", () => {
-    const res = renderToString(<CompanionObject supertypes={["Builder"]} />);
+  it("renders a private companion object", () => {
+    const res = renderInTestContext(<Object companion private />);
 
-    expect(res).toBe("companion object : Builder");
+    expect(res).toContain("private companion object");
+  });
+
+  it("renders an object with an annotation", () => {
+    const res = renderInTestContext(<Object name="Singleton" annotations={[{ type: "Anno" }]} />);
+
+    expect(res).toContain(d`
+      @Anno
+      object Singleton
+    `);
+  });
+
+  it("renders external object", () => {
+    const res = renderInTestContext(<Object external name="Singleton" />);
+
+    expect(res).toContain("external object Singleton");
+  });
+
+  it("renders external companion object", () => {
+    const res = renderInTestContext(<Object external companion />);
+
+    expect(res).toContain("external companion object");
   });
 });

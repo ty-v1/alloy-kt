@@ -1,5 +1,5 @@
 import { Children, Namekey, Show } from "@alloy-js/core";
-import { isNonNullish } from "remeda";
+import { isNonNullish, isString } from "remeda";
 import { useKotlinNamePolicy } from "../context/createKotlinNamePolicy.js";
 
 export type VariableProps = {
@@ -21,21 +21,21 @@ export type VariableProps = {
  * Kotlin local variable declaration.
  * val is used by default.
  */
-export const Variable = (props: VariableProps) => {
-  const rawName = typeof props.name === "string" ? props.name : props.name.name;
-  const name = useKotlinNamePolicy().getName(rawName, "variable");
-  const keyword = props.var ? "var" : "val";
+export const Variable = ({ name, type, var: ktVar = false, initialValue }: VariableProps) => {
+  const rawName = isString(name) ? name : name.name;
+  const varName = useKotlinNamePolicy().getName(rawName, "variable");
+  const keyword = ktVar ? "var" : "val";
 
   return (
     <>
-      {keyword} {name}
-      <Show when={isNonNullish(props.type)}>
+      {keyword} {varName}
+      <Show when={isNonNullish(type)}>
         {": "}
-        {props.type}
+        {type}
       </Show>
-      <Show when={isNonNullish(props.initialValue)}>
+      <Show when={isNonNullish(initialValue)}>
         {" = "}
-        {props.initialValue}
+        {initialValue}
       </Show>
     </>
   );
