@@ -59,11 +59,8 @@ describe("Property", () => {
     expect(render(<Property external val name="count" type="Int" />)).toBe("external val count: Int");
   });
 
-
   it("renders delegated val", () => {
-    expect(render(<Property val name="value" type="String" by="delegate" />)).toBe(
-      "val value: String by delegate",
-    );
+    expect(render(<Property val name="value" type="String" by="delegate" />)).toBe("val value: String by delegate");
   });
 
   it("renders delegated var with modifier", () => {
