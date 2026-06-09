@@ -37,24 +37,25 @@ describe("Named arguments", () => {
 
   it("renders multiple named arguments", () => {
     const res = renderToString(
-      <Arguments args={[{ name: "x", value: "1" }, { name: "y", value: "2" }]} />,
+      <Arguments
+        args={[
+          { name: "x", value: "1" },
+          { name: "y", value: "2" },
+        ]}
+      />,
     );
 
     expect(res).toBe("(x = 1, y = 2)");
   });
 
   it("renders mixed positional and named arguments", () => {
-    const res = renderToString(
-      <Arguments args={["pos", { name: "x", value: "1" }]} />,
-    );
+    const res = renderToString(<Arguments args={["pos", { name: "x", value: "1" }]} />);
 
     expect(res).toBe("(pos, x = 1)");
   });
 
   it("omits null elements when mixed with named arguments", () => {
-    const res = renderToString(
-      <Arguments args={[null, { name: "x", value: "1" }, undefined]} />,
-    );
+    const res = renderToString(<Arguments args={[null, { name: "x", value: "1" }, undefined]} />);
 
     expect(res).toBe("(x = 1)");
   });

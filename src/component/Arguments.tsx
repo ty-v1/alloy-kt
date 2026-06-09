@@ -31,7 +31,16 @@ export const Arguments = ({ args = [] }: ArgumentsProps) => {
       {"("}
       {mapJoin(
         () => args.filter((e) => isNonNullish(e)),
-        (e) => (isNamedArgument(e) ? <>{e.name}{" = "}{e.value}</> : e),
+        (e) =>
+          isNamedArgument(e) ? (
+            <>
+              {e.name}
+              {" = "}
+              {e.value}
+            </>
+          ) : (
+            e
+          ),
         { joiner: ", " },
       )}
       {")"}
