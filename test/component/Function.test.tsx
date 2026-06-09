@@ -90,4 +90,10 @@ describe("Function", () => {
 
     expect(res).toBe("fun greet(vararg names: String)");
   });
+
+  it("renders external function", () => {
+    const res = renderToString(<Function external name="fetch" />);
+
+    expect(res).toBe("external fun fetch()");
+  });
 });

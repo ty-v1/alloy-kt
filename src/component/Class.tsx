@@ -41,6 +41,7 @@ export type ClassProps = TypeParametersProps & {
    * @see https://kotlinlang.org/docs/inline-classes.html
    */
   readonly value?: boolean;
+  readonly external?: boolean;
   readonly annotations?: AnnotationProps[];
   readonly primaryConstructor?: PrimaryConstructorProps;
   readonly extends?: Children;

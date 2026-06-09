@@ -33,6 +33,7 @@ export type FunctionProps = TypeParametersProps & {
   readonly tailrec?: boolean;
   readonly expect?: boolean;
   readonly actual?: boolean;
+  readonly external?: boolean;
   readonly annotations?: AnnotationProps[];
 };
 
@@ -41,14 +42,14 @@ type FunctionBodyProps = {
   readonly children?: Children;
 };
 
-const FunctionBody = (props: FunctionBodyProps) => {
-  if (isNonNullish(props.expressionBody)) {
-    return code` = ${props.expressionBody}`;
-  } else if (isNonNullish(props.children)) {
+const FunctionBody = ({ expressionBody, children }: FunctionBodyProps) => {
+  if (isNonNullish(expressionBody)) {
+    return code` = ${expressionBody}`;
+  } else if (isNonNullish(children)) {
     return (
       <>
         {" "}
-        <Block>{props.children}</Block>
+        <Block>{children}</Block>
       </>
     );
   } else {
@@ -60,26 +61,35 @@ const FunctionBody = (props: FunctionBodyProps) => {
  * Kotlin function declaration.
  * `expressionBody` takes priority over `children`.
  */
-export const Function = (props: FunctionProps) => {
-  const name = useKotlinNamePolicy().getName(props.name, "function");
+export const Function = ({
+  expressionBody,
+  name,
+  children,
+  returnType,
+  annotations = [],
+  generics,
+  parameters,
+  ...modifiers
+}: FunctionProps) => {
+  const functionName = useKotlinNamePolicy().getName(name, "function");
 
   return (
     <>
-      <Show when={!isEmptyish(props.annotations)}>
-        <Annotations annotations={props.annotations ?? []} />
+      <Show when={!isEmptyish(annotations)}>
+        <Annotations annotations={annotations} />
         <hbr />
       </Show>
-      <Modifiers {...props} />
+      <Modifiers {...modifiers} />
       {"fun "}
-      <Show when={isNonNullish(props.generics)}>
-        <TypeParameters generics={props.generics} />{" "}
+      <Show when={isNonNullish(generics)}>
+        <TypeParameters generics={generics} />{" "}
       </Show>
-      {name}(<Parameters parameters={props.parameters} />)
-      <Show when={isNonNullish(props.returnType)}>
+      {functionName}(<Parameters parameters={parameters} />)
+      <Show when={isNonNullish(returnType)}>
         {": "}
-        {props.returnType}
+        {returnType}
       </Show>
-      <FunctionBody expressionBody={props.expressionBody}>{props.children}</FunctionBody>
+      <FunctionBody expressionBody={expressionBody}>{children}</FunctionBody>
     </>
   );
 };

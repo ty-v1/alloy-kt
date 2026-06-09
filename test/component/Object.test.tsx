@@ -53,4 +53,16 @@ describe("Object", () => {
       object Singleton
     `);
   });
+
+  it("renders external object", () => {
+    const res = renderInTestContext(<Object external name="Singleton" />);
+
+    expect(res).toContain("external object Singleton");
+  });
+
+  it("renders external companion object", () => {
+    const res = renderInTestContext(<Object external companion />);
+
+    expect(res).toContain("external companion object");
+  });
 });

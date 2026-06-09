@@ -15,6 +15,7 @@ type ObjectDeclarationCommon = {
   readonly private?: boolean;
   readonly protected?: boolean;
   readonly internal?: boolean;
+  readonly external?: boolean;
   readonly supertypes?: Children[];
   readonly annotations?: AnnotationProps[];
 };

@@ -39,6 +39,12 @@ describe("Enum", () => {
       }
     `);
   });
+
+  it("renders external enum class", () => {
+    const res = renderInTestContext(<Enum external name="Color" />);
+
+    expect(res).toContain("external enum class Color");
+  });
 });
 
 describe("EnumMember", () => {

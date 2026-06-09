@@ -24,6 +24,7 @@ export type PropertyProps = {
   // property-specific
   readonly const?: boolean;
   readonly lateinit?: boolean;
+  readonly external?: boolean;
   readonly annotations?: AnnotationProps[];
 };
 

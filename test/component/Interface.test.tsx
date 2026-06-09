@@ -32,4 +32,10 @@ describe("Interface", () => {
 
     expect(res).toContain("interface Bar : Foo, Baz");
   });
+
+  it("renders external interface", () => {
+    const res = renderInTestContext(<Interface external name="Foo" />);
+
+    expect(res).toContain("external interface Foo");
+  });
 });
