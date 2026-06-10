@@ -11,6 +11,7 @@
   },
   "files": [
     "dist",
+    "src",
     "LICENSE",
     "THIRD_PARTY_NOTICES",
     "README.md"
