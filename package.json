@@ -1,6 +1,6 @@
 {
   "name": "alloy-kt",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "exports": {
@@ -11,6 +11,7 @@
   },
   "files": [
     "dist",
+    "src",
     "LICENSE",
     "THIRD_PARTY_NOTICES",
     "README.md"
