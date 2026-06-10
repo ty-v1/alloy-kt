@@ -56,6 +56,17 @@ export const SourceFile = (props: SourceFileProps) => {
     return symbol.name;
   }
 
+  function resolveForDoc(symbol: KotlinOutputSymbol): string {
+    const qualifiedName = packageCtx?.qualifiedName;
+    const pkg = symbol.package ?? "";
+
+    if (symbol.package === qualifiedName || pkg.startsWith("kotlin.") || importedSymbols.has(symbol)) {
+      return symbol.name;
+    }
+
+    return !isEmptyish(pkg) ? `${pkg}.${symbol.name}` : symbol.name;
+  }
+
   return (
     <CoreSourceFile path={props.path} filetype="kt" reference={Reference}>
       package {packageCtx.qualifiedName}
@@ -66,7 +77,7 @@ export const SourceFile = (props: SourceFileProps) => {
         <hbr />
         <hbr />
       </Show>
-      <KotlinSourceFileContext.Provider value={{ addImport }}>
+      <KotlinSourceFileContext.Provider value={{ addImport, resolveForDoc }}>
         <LexicalScope name={props.path}>{props.children}</LexicalScope>
       </KotlinSourceFileContext.Provider>
     </CoreSourceFile>
