@@ -28,3 +28,4 @@ export * from "./ImportStatements.js";
 export * from "./Name.js";
 export * from "./PackageDirectory.js";
 export * from "./SupertypeList.js";
+export * from "./KDoc.js";
