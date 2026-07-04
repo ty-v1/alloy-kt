@@ -20,12 +20,6 @@ describe("Arguments", () => {
 
     expect(res).toBe("(42)");
   });
-
-  it("omits nullable elements", () => {
-    const res = renderToString(<Arguments args={[{ value: "a" }, null, undefined, { value: "b" }]} />);
-
-    expect(res).toBe("(a, b)");
-  });
 });
 
 describe("Named arguments", () => {
@@ -52,12 +46,6 @@ describe("Named arguments", () => {
     const res = renderToString(<Arguments args={[{ value: "pos" }, { name: "x", value: "1" }]} />);
 
     expect(res).toBe("(pos, x = 1)");
-  });
-
-  it("omits null elements when mixed with named arguments", () => {
-    const res = renderToString(<Arguments args={[null, { name: "x", value: "1" }, undefined]} />);
-
-    expect(res).toBe("(x = 1)");
   });
 });
 

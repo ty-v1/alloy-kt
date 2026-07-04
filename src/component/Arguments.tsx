@@ -1,5 +1,5 @@
 import { Children, mapJoin, Show } from "@alloy-js/core";
-import { isNonNullish, isPlainObject } from "remeda";
+import { isPlainObject } from "remeda";
 
 /**
  * Positional argument for a function call.
@@ -21,9 +21,8 @@ export type ArgumentsProps = {
   /**
    * Arguments for a function call.
    * Each element is a positional argument or a named argument ({ name, value }).
-   * Nullable elements will be omitted.
    */
-  readonly args?: (PositionalArgument | NamedArgument | null | undefined)[];
+  readonly args?: (PositionalArgument | NamedArgument)[];
 };
 
 function isNamedArgument(v: PositionalArgument | NamedArgument): v is NamedArgument {
@@ -38,7 +37,7 @@ export const Arguments = ({ args = [] }: ArgumentsProps) => {
     <>
       {"("}
       {mapJoin(
-        () => args.filter((e) => isNonNullish(e)),
+        () => args,
         (e) =>
           isNamedArgument(e) ? (
             <>
