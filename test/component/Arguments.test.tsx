@@ -43,9 +43,7 @@ describe("Named arguments", () => {
   });
 
   it("renders mixed positional and named arguments", () => {
-    const res = renderToString(
-      <Arguments args={[{ value: "pos" }, { name: "x", value: "1" }]} />,
-    );
+    const res = renderToString(<Arguments args={[{ value: "pos" }, { name: "x", value: "1" }]} />);
 
     expect(res).toBe("(pos, x = 1)");
   });
