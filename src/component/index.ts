@@ -2,6 +2,7 @@ export * from "./Annotation.js";
 export * from "./Arguments.js";
 export * from "./Class.js";
 export * from "./Constructor.js";
+export * from "./DestructuringVariable.js";
 export * from "./For.js";
 export * from "./If.js";
 export * from "./When.js";
