@@ -1,5 +1,13 @@
-import { Children, mapJoin } from "@alloy-js/core";
+import { Children, mapJoin, Show } from "@alloy-js/core";
 import { isNonNullish, isPlainObject } from "remeda";
+
+/**
+ * Positional argument for a function call.
+ */
+export type PositionalArgument = {
+  readonly value: Children;
+  readonly spread?: boolean;
+};
 
 /**
  * Named argument for a function call.
@@ -12,14 +20,14 @@ export type NamedArgument = {
 export type ArgumentsProps = {
   /**
    * Arguments for a function call.
-   * Each element is a positional argument (Children) or a named argument ({ name, value }).
+   * Each element is a positional argument or a named argument ({ name, value }).
    * Nullable elements will be omitted.
    */
-  readonly args?: (Children | NamedArgument)[];
+  readonly args?: (PositionalArgument | NamedArgument | null | undefined)[];
 };
 
-function isNamedArgument(v: Children | NamedArgument): v is NamedArgument {
-  return isPlainObject(v) && "name" in v && "value" in v;
+function isNamedArgument(v: PositionalArgument | NamedArgument): v is NamedArgument {
+  return isPlainObject(v) && "name" in v;
 }
 
 /**
@@ -39,7 +47,10 @@ export const Arguments = ({ args = [] }: ArgumentsProps) => {
               {e.value}
             </>
           ) : (
-            e
+            <>
+              <Show when={e.spread}>{"*"}</Show>
+              {e.value}
+            </>
           ),
         { joiner: ", " },
       )}
