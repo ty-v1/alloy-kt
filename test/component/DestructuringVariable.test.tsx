@@ -25,25 +25,21 @@ describe("DestructuringVariable", () => {
   });
 
   it("renders val without type annotations", () => {
-    expect(
-      render(
-        <DestructuringVariable val variables={[{ name: "x" }, { name: "y" }]} initialValue="point" />,
-      ),
-    ).toBe("val (x, y) = point");
+    expect(render(<DestructuringVariable val variables={[{ name: "x" }, { name: "y" }]} initialValue="point" />)).toBe(
+      "val (x, y) = point",
+    );
   });
 
   it("defaults to val when neither val nor var is set", () => {
-    expect(
-      render(<DestructuringVariable variables={[{ name: "a" }, { name: "b" }]} initialValue="pair" />),
-    ).toBe("val (a, b) = pair");
+    expect(render(<DestructuringVariable variables={[{ name: "a" }, { name: "b" }]} initialValue="pair" />)).toBe(
+      "val (a, b) = pair",
+    );
   });
 
   it("renders var keyword", () => {
-    expect(
-      render(
-        <DestructuringVariable var variables={[{ name: "x" }, { name: "y" }]} initialValue="point" />,
-      ),
-    ).toBe("var (x, y) = point");
+    expect(render(<DestructuringVariable var variables={[{ name: "x" }, { name: "y" }]} initialValue="point" />)).toBe(
+      "var (x, y) = point",
+    );
   });
 
   it("renders mixed variables with and without type annotations", () => {
@@ -61,18 +57,12 @@ describe("DestructuringVariable", () => {
   it("applies name policy to variable names", () => {
     expect(
       render(
-        <DestructuringVariable
-          val
-          variables={[{ name: "FirstName" }, { name: "LastName" }]}
-          initialValue="person"
-        />,
+        <DestructuringVariable val variables={[{ name: "FirstName" }, { name: "LastName" }]} initialValue="person" />,
       ),
     ).toBe("val (firstName, lastName) = person");
   });
 
   it("renders without initialValue", () => {
-    expect(
-      render(<DestructuringVariable val variables={[{ name: "a" }, { name: "b" }]} />),
-    ).toBe("val (a, b)");
+    expect(render(<DestructuringVariable val variables={[{ name: "a" }, { name: "b" }]} />)).toBe("val (a, b)");
   });
 });

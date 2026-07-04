@@ -18,11 +18,7 @@ export type DestructuringVariableProps = {
  * Kotlin destructuring variable declaration.
  * val is used by default.
  */
-export const DestructuringVariable = ({
-  var: ktVar = false,
-  variables,
-  initialValue,
-}: DestructuringVariableProps) => {
+export const DestructuringVariable = ({ var: ktVar = false, variables, initialValue }: DestructuringVariableProps) => {
   const namePolicy = useKotlinNamePolicy();
   const keyword = ktVar ? "var" : "val";
 

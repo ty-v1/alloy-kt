@@ -71,16 +71,14 @@ describe("For", () => {
   });
 
   it("applies name policy to destructuring parameter names", () => {
-    expect(
-      render(<For variables={[{ name: "MyKey" }, { name: "MyValue" }]} iterable="map" />),
-    ).toBe("for ((myKey, myValue) in map) {}");
+    expect(render(<For variables={[{ name: "MyKey" }, { name: "MyValue" }]} iterable="map" />)).toBe(
+      "for ((myKey, myValue) in map) {}",
+    );
   });
 
   it("prefers variables over variable when both are given", () => {
-    expect(
-      render(
-        <For variable="item" variables={[{ name: "key" }, { name: "value" }]} iterable="map" />,
-      ),
-    ).toBe("for ((key, value) in map) {}");
+    expect(render(<For variable="item" variables={[{ name: "key" }, { name: "value" }]} iterable="map" />)).toBe(
+      "for ((key, value) in map) {}",
+    );
   });
 });
