@@ -15,6 +15,7 @@ export * from "./Interface.js";
 export * from "./LexicalScope.js";
 export * from "./Modifiers.js";
 export * from "./Object.js";
+export * from "./ObjectExpression.js";
 export * from "./Parameters.js";
 export * from "./Property.js";
 export * from "./Reference.js";
